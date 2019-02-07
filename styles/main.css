@@ -1,0 +1,174 @@
+/**
+  Color Palette:
+  Navy Blue:     #120a6b
+  Medium Blue:   #1a15bd
+  Light BLue:    #69b4e1
+  Dark Green:    #08946d
+  Light Green:   #47e77a
+**/
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  background: #69b4e1;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  position: fixed;
+  border-bottom: 0.5em solid #47e77a;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: auto;
+}
+
+.logo {
+  color: white;
+  margin-left: 1.5rem;
+}
+
+.logo a {
+  text-decoration: none;
+  color: white;
+}
+
+.account {
+  display: flex;
+  justify-content: space-evenly;
+  margin-right: 10px;
+}
+
+.account .btn {
+  width: 6rem;
+  font-size: 1.5rem;
+}
+
+.btn {
+  border: 1px solid white;
+  padding: 0.5rem;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 100px;
+  margin: 1rem;
+}
+
+.btn:hover {
+  color: #69b4e1;
+  background: white;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: rgba(90, 88, 88, 0.5) url("../_images/green-flagstick.jpg") no-repeat fixed bottom;
+  background-size: cover;
+  font-size: 3.5rem;
+  font-family: 'Fugaz One', cursive;
+  text-align: center;
+  text-decoration: underline;
+  -webkit-text-decoration-color: #47e77a;
+  text-decoration-color: #47e77a;
+  padding-top: 16vh;
+  color: white;
+}
+
+.tagline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgba(105, 105, 105, 0.7);
+  border-radius: 100px;
+  padding: 2rem;
+  margin: 0px 10px 200px 10px;
+}
+
+.explanation {
+  background-color: #eeecec;
+  text-align: center;
+  font-family: 'Prompt', sans-serif;
+  font-size: 2.5rem;
+  color: #69b4e1;
+  padding-top: 50px;
+}
+
+.explanation em {
+  text-decoration: underline;
+  -webkit-text-decoration-color: #47e77a;
+  text-decoration-color: #47e77a;
+}
+
+.filler {
+  height: 200vh;
+}
+
+.container {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-in-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 50%;
+  border: 5px solid #47e77a;
+  background: #d7dbdf;
+}
+
+@media (max-width: 800px) {
+  .landing {
+    font-size: 2rem; 
+  }
+
+  .tagline {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .logo {
+    margin: auto;  
+  }
+  
+  .account {
+    width: auto;
+    margin: auto;
+  }
+
+  .account .btn {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+
+  .landing {
+    font-size: 1rem; 
+  }
+
+  .tagline {
+    padding: 0.5rem;
+    margin: auto;
+  }
+}
+
+@media (max-width: 350px) {
+  .landing {
+    font-size: 1.5rem;
+  }
+}
