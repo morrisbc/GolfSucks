@@ -2,9 +2,9 @@
   Color Palette:
   Navy Blue:     #120a6b
   Medium Blue:   #1a15bd
-  Light BLue:    #69b4e1
-  Dark Green:    #08946d
-  Light Green:   #47e77a
+  Light BLue:    #69b4e1  **
+  Dark Green:    #08946d  **
+  Light Green:   #47e77a  **
 **/
 
 * {
@@ -16,19 +16,34 @@ header {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  background: #69b4e1;
+  background: #4eabe6;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 0;
   position: fixed;
   border-bottom: 0.5em solid #47e77a;
   font-family: Arial, Helvetica, sans-serif;
   overflow: auto;
 }
 
+header a {
+  color: white;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+h2 + p {
+  margin-top: 2rem;
+}
+
 .logo {
   color: white;
   margin-left: 1.5rem;
+  font-family: 'Fugaz One', cursive;
+  white-space: nowrap;
 }
 
 .logo a {
@@ -39,12 +54,13 @@ header {
 .account {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   margin-right: 10px;
 }
 
 .account .btn {
   width: 6rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .btn {
@@ -57,14 +73,8 @@ header {
 }
 
 .btn:hover {
-  color: #69b4e1;
+  color: #4eabe6;
   background: white;
-}
-
-header a {
-  color: white;
-  text-decoration: none;
-  font-family: sans-serif;
 }
 
 .landing {
@@ -75,13 +85,13 @@ header a {
   height: 90vh;
   background: rgba(90, 88, 88, 0.5) url("../_images/green-flagstick.jpg") no-repeat fixed bottom;
   background-size: cover;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-family: 'Fugaz One', cursive;
   text-align: center;
   text-decoration: underline;
   -webkit-text-decoration-color: #47e77a;
   text-decoration-color: #47e77a;
-  padding-top: 16vh;
+  padding-top: 15vh;
   color: white;
 }
 
@@ -93,7 +103,7 @@ header a {
   background: rgba(105, 105, 105, 0.7);
   border-radius: 100px;
   padding: 2rem;
-  margin: 0px 10px 200px 10px;
+  margin: 0px 10px 150px 10px;
 }
 
 .explanation {
@@ -101,70 +111,113 @@ header a {
   text-align: center;
   font-family: 'Prompt', sans-serif;
   font-size: 2.5rem;
-  color: #69b4e1;
-  padding-top: 50px;
+  color: #4eabe6;
+  padding: 1rem 3rem;
 }
 
-.explanation em {
-  text-decoration: underline;
-  -webkit-text-decoration-color: #47e77a;
-  text-decoration-color: #47e77a;
-}
+/* .explanation h3 {
+  font-size: 2rem;
+} */
 
-.filler {
-  height: 200vh;
-}
-
-.container {
+.stats {
   display: flex;
-  height: 90vh;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  background-color: #4eabe6;
+  /* background-color: #95cbeb; */
+  font-family: 'Prompt', sans-serif;
+  color: white;
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 1rem 0;
 }
 
-.log-in-form {
+.icon-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 30%;
-  height: 50%;
-  border: 5px solid #47e77a;
-  background: #d7dbdf;
+  justify-content: space-evenly;
+  font-size: 2rem;
+  padding: 1rem;
 }
 
-@media (max-width: 800px) {
+.stat-icon {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-icon caption {
+  align-self: flex-end;
+}
+
+footer {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #4eabe6;
+  border-top: 0.5rem solid #47e77a;
+  text-align: center;
+  color: white;
+  padding: 1rem;
+}
+
+footer p {
+  font-size: 1rem;
+}
+
+@media (max-width: 950px) {
   .landing {
-    font-size: 2rem; 
+    font-size: 2rem;
+    padding-top: 25vh;
   }
 
   .tagline {
     padding: 1rem;
   }
+
+  .icon-wrapper {
+    flex-direction: column;
+  }
+
+  .stat-icon {
+    margin: 1em 0;
+  }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 550px) {
+  header {
+    padding: 1rem;
+  }
+  
   .logo {
     margin: auto;  
   }
   
   .account {
     width: auto;
-    margin: auto;
+    margin: 10px auto;
+    display: none;
   }
 
   .account .btn {
-    margin-bottom: 0;
     font-size: 1rem;
   }
 
   .landing {
     font-size: 1rem; 
+    background-image: url("../_images/fairway.jpg");
+    background-position: center;
+    background-attachment: initial;
+    padding-top: 15vh;
   }
 
   .tagline {
-    padding: 0.5rem;
-    margin: auto;
+    padding: 0.75rem;
   }
+
+  .explanation h2, .stats h2 {
+    font-size: 2rem;
+  }
+
+  /* section h3 {
+    font-size: 1.5rem;
+  } */
 }
 
 @media (max-width: 350px) {
