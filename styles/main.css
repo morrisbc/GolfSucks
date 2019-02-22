@@ -233,6 +233,7 @@ footer p {
 
 .board {
   background: white;
+  background-size: cover;
   grid-row: span 24;
   grid-column: span 23;
   display: grid;
