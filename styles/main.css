@@ -175,23 +175,41 @@ footer p {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-family: 'Prompt', sans-serif;
+  background: #4eabe6;
+  border: 3px solid #47e77a;
+  width: 35%;
+}
+
+.log-in-box form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background: rgba(105, 105, 105, 0.7);
-  width: 30%;
   font-family: 'Prompt', sans-serif;
   font-size: 1.5rem;
   color: white;
 }
 
-.log-in-box div {
-  margin: 1rem;
-  border: 1px solid black;
-  width: 100%;
+form label {
+  margin-bottom: 10px;
 }
 
-.log-in-box input {
-  width: 100%;
+form input {
+  width: 50%;
+  height: 25px;
+  margin: 0 0 20px 0;
+  padding: 5px;
 }
+
+form input[type="submit"] {
+  height: 3rem;
+  background-color: #4eabe6;
+  color: white;
+  font-size: 1.25rem;
+  /* Clears default styling on iOS Safari */
+  -webkit-appearance: none;
+} 
 
 /*
   Dashboard syles
@@ -330,5 +348,20 @@ footer p {
     background-image: url("../_images/fairway.jpg");
     background-position: center;
     background-attachment: initial;
+  }
+
+  .log-in-box {
+    width: 80%;
+    padding: 1rem;
+  }
+
+  .log-in-box h2 {
+    font-size: 2rem;
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  form input {
+    width: 100%;
   }
 }
