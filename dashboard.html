@@ -1,30 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" type="text/css" href="styles/main.css">
-  <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Prompt" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  <script src="scripts/main.js"></script>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <title>GolfSucks | Dashboard</title>
-</head>
-<body>
-  <div class="grid">
-    <aside class="side-nav">
-      <div id="user"><i class="far fa-user"></i></div>
-      <div id="home"><i class="fas fa-home"></i></div>
-      <div id="scoring"><i class="fas fa-crown"></i></div>
-      <div id="tee-accuracy"><i class="fas fa-golf-ball"></i></div>
-      <div id="gir"><i class="far fa-flag"></i></div>
-      <div id="putting"><i class="far fa-dot-circle"></i></div>
-      <div id="settings"><i class="fas fa-cog"></i></div>
-    </aside>
-    <div class="board">
-      <div class="overview"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Fugaz+One|Prompt"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+      crossorigin="anonymous"
+    />
+    <script src="scripts/main.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>GolfSucks | Dashboard</title>
+  </head>
+  <body class="dash-body">
+    <div class="dash-grid">
+      <div class="dash-nav">
+        <div class="dash-profile"></div>
+        <div class="nav-elem dash-overview">
+          <i class="far fa-chart-bar"></i>
+          <h2 class="nav-elem-heading">Overview</h2>
+        </div>
+        <div class="nav-elem dash-tee-accuracy">
+          <i class="fas fa-crosshairs"></i>
+          <h2 class="nav-elem-heading">Tee Accuracy</h2>
+        </div>
+        <div class="nav-elem dash-gir">
+          <i class="far fa-circle"></i>
+          <h2 class="nav-elem-heading">GIR</h2>
+        </div>
+        <div class="nav-elem dash-putts">
+          <i class="fas fa-hand-holding-usd"></i>
+          <h2 class="nav-elem-heading">Putting</h2>
+        </div>
+        <div class="dash-options">
+          <a href="" class="settings"><i class="fas fa-cog"></i></a>
+          <a href="index.html" class="logout"
+            ><i class="fas fa-sign-out-alt"></i
+          ></a>
+        </div>
+      </div>
+      <div class="dash-info">
+        <div class="info-elem info-scoring"><h2>Scoring</h2></div>
+        <div class="info-elem info-tee-accuracy"><h2>Tee Accuracy</h2></div>
+        <div class="info-elem info-gir"><h2>Greens In Regulation</h2></div>
+        <div class="info-elem info-putts"><h2>Putting</h2></div>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

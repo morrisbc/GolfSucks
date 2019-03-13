@@ -50,7 +50,7 @@ h2 + p {
 .logo {
   color: white;
   margin-left: 1.5rem;
-  font-family: 'Fugaz One', cursive;
+  font-family: "Fugaz One", cursive;
   white-space: nowrap;
 }
 
@@ -93,7 +93,7 @@ h2 + p {
   background: url("../images/green-flagstick.jpg") no-repeat fixed bottom;
   background-size: cover;
   font-size: 3rem;
-  font-family: 'Fugaz One', cursive;
+  font-family: "Fugaz One", cursive;
   text-align: center;
   text-decoration: underline;
   -webkit-text-decoration-color: #47e77a;
@@ -113,10 +113,11 @@ h2 + p {
   margin: 0px 10px 150px 10px;
 }
 
-.explanation, .filler{
+.explanation,
+.filler {
   background-color: #eeecec;
   text-align: center;
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
   font-size: 2.5rem;
   color: #4eabe6;
   padding: 1rem 4rem;
@@ -126,7 +127,7 @@ h2 + p {
   display: flex;
   flex-direction: column;
   background-color: #4eabe6;
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
   color: white;
   font-size: 2.5rem;
   text-align: center;
@@ -176,7 +177,7 @@ footer p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
   background: #4eabe6;
   border: 3px solid #47e77a;
   padding: 2rem;
@@ -188,7 +189,7 @@ footer p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
   font-size: 1.5rem;
   color: white;
 }
@@ -211,62 +212,113 @@ form input[type="submit"] {
   font-size: 1rem;
   /* Clears default styling on iOS Safari */
   -webkit-appearance: none;
-} 
+  cursor: pointer;
+}
 
 /*
   Dashboard syles
 */
 
-.grid {
-  height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(24, 1fr);
-  grid-template-rows: repeat(24, 1fr);
-  font-family: 'Prompt', sans-serif; 
-}
-
-.side-nav {
-  background-color: #4eabe6;
-  grid-row: span 24;
-  display: grid;
-  grid-template-rows: repeat(7, 1fr);
-  font-size: 3rem;
-}
-
-.side-nav div {
-  border-top: 3px solid #47e77a;
-  border-right: 3px solid #47e77a;
-  text-align: center;
-  color: white;
+.dash-body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.side-nav div:hover {
-  background: #045b91;
-}
-
-#user {
-  border-top: none;
-}
-
-.board {
-  background: white;
+  background-image: url("../images/course-aerial.jpg");
   background-size: cover;
-  grid-row: span 24;
-  grid-column: span 23;
-  display: grid;
-  grid-template-columns: repeat(24, 1fr);
-  grid-template-rows: repeat(24, 1fr);
 }
 
-.overview {
+.dash-grid {
+  width: 95vw;
+  height: 95vh;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  font-family: "Prompt", sans-serif;
+  margin: 1rem;
+  border-radius: 25px;
+}
+
+.dash-nav {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(78, 171, 230, 0.7);
+  border-right: 5px solid #47e77a;
+  border-radius: 25px 0 0 25px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: normal;
+  padding: 1rem;
+}
+
+.dash-nav a {
+  color: white;
+}
+
+.nav-elem {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 15px;
+  margin: 0 5px;
+}
+
+.nav-elem:hover {
+  background-color: white;
+  color: #4eabe6;
+}
+
+.nav-elem-heading {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin-left: 1rem;
+}
+
+.dash-profile {
+  border: 2px solid #47e77a;
+  margin: 1rem 1rem 5rem 1rem;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  align-self: center;
+}
+
+.dash-options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: auto;
+}
+
+.dash-options a {
+  width: 50%;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.dash-options a:hover {
+  color: #4eabe6;
+  background-color: white;
+}
+
+.dash-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3rem;
+  padding: 3rem;
+  background-color: white;
+  border-radius: 0 25px 25px 0;
+}
+
+.info-elem {
   background: #4eabe6;
-  grid-row: 6 / 20;
-  grid-column: 7 / 19;
-  border-radius: 30px;
-  border: 4px solid #47e77a;
+  border: 3px solid #47e77a;
+  border-radius: 15px;
+}
+
+.info-elem h2 {
+  color: white;
+  text-align: center;
+  font-weight: normal;
+  font-size: 2rem;
 }
 
 /*
@@ -296,9 +348,9 @@ form input[type="submit"] {
   header {
     padding: 1rem;
   }
-  
+
   .logo {
-    margin: auto;  
+    margin: auto;
   }
 
   .account {
@@ -313,7 +365,7 @@ form input[type="submit"] {
   }
 
   .landing {
-    font-size: 1rem; 
+    font-size: 1rem;
     background-image: url("../images/fairway.jpg");
     background-position: center;
     background-attachment: initial;
@@ -324,12 +376,16 @@ form input[type="submit"] {
     padding: 0.75rem;
   }
 
-  .explanation, .stats, .filler {
+  .explanation,
+  .stats,
+  .filler {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
 
-  .explanation h2, .stats h2, .filler h2 {
+  .explanation h2,
+  .stats h2,
+  .filler h2 {
     font-size: 2rem;
   }
 
