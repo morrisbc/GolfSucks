@@ -17,7 +17,7 @@
 }
 
 :focus {
-  border: 3px solid #47e77a;
+  border: 2px solid #47e77a;
 }
 
 header {
@@ -249,40 +249,40 @@ form input[type="submit"] {
   padding: 1rem;
 }
 
-.dash-nav a {
-  color: white;
-  font-size: 1.5vmax;
+.dash-nav .logo {
+  text-align: center;
+  border-bottom: 2px solid #47e77a;
+  margin: 0 5px 2rem 5px;
+  font-size: 1vw;
+  text-decoration: none;
 }
 
 .nav-elem {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   padding: 1rem;
-  border-radius: 15px;
-  margin: 0 5px;
+  border-radius: 15px 0 0 15px;
+  margin: 0 0 0 5px;
+  font-size: 1vw;
 }
 
-.nav-elem:hover {
+.nav-elem:hover,
+.nav-elem-current {
   background-color: white;
   color: #4eabe6;
+  cursor: pointer;
 }
 
 .nav-elem-heading {
-  font-size: 2.5vmin;
   font-weight: normal;
   margin-left: 1rem;
   white-space: nowrap;
 }
 
-/* .dash-profile {
-  border: 3px solid #47e77a;
-  margin: 1rem 1rem 5rem 1rem;
-  border-radius: 50%;
-  width: 80%;
-  padding-top: 80%;
-  align-self: center;
-  background-color: white;
-} */
+.nav-elem i {
+  font-size: 1.5vw;
+}
 
 .dash-options {
   display: flex;
@@ -294,6 +294,8 @@ form input[type="submit"] {
   width: 50%;
   text-align: center;
   border-radius: 10px;
+  color: white;
+  font-size: 1.5vmax;
 }
 
 .dash-options a:hover {
