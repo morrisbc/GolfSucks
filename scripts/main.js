@@ -10,11 +10,14 @@ function showNavMenu() {
   }
 }
 
+// Get the navigation menu options from the dashboard
 var navOptions = document.querySelectorAll(".nav-elem");
 navOptions.forEach(function(option) {
   option.addEventListener("click", highlightCurrent);
 });
 
+// Highlight the currently selected menu item from the
+// dashboard navigation menu
 function highlightCurrent(e) {
   let current;
 
