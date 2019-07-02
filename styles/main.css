@@ -1,87 +1,96 @@
-/**
-  Color Palette:
-  Navy Blue:     #120a6b
-  Medium Blue:   #1a15bd
-  Light BLue:    #69b4e1  **
-  Dark Green:    #08946d  **
-  Light Green:   #47e77a  **
-**/
-
 /*
-  General and landing page styles
+* Application Color Palette
 */
+:root {
+  --primary-color: rgb(78, 171, 230);
+  --alt-primary-color: rgb(9, 118, 182);
+  --tertiary-color: rgb(238, 236, 236);
+  --accent-color: rgb(71, 231, 122);
+}
 
 * {
   margin: 0;
   padding: 0;
 }
 
-:focus {
-  border: 2px solid #47e77a;
+.alert {
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+  width: 50%;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-family: "Prompt", sans-serif;
+}
+
+.alert-danger {
+  border: 2px solid rgb(236, 41, 41);
+  background-color: rgb(236, 118, 118);
+  color: white;
+}
+
+.alert-success {
+  border: 2px solid rgb(5, 139, 57);
+  background-color: rgb(30, 214, 137);
+  color: white;
+}
+
+.btn {
+  border-radius: 100px;
+  border: 1px solid;
+  padding: 5px 10px;
+  font-family: "Prompt", sans-serif;
+  text-decoration: none;
+  text-align: center;
+  color: white;
 }
 
 header {
   display: flex;
-  width: 100vw;
-  flex-wrap: wrap;
-  background: #4eabe6;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
-  border-bottom: 0.5em solid #47e77a;
-  font-family: Arial, Helvetica, sans-serif;
+  height: 10vh;
+  background-color: var(--primary-color);
+  border-bottom: 5px solid var(--accent-color);
   box-sizing: border-box;
+  padding: 1rem;
 }
 
-header a {
+#landing-header {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+  background-color: var(--primary-color);
+  border-top: 5px solid var(--accent-color);
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
   color: white;
-  text-decoration: none;
-  font-family: sans-serif;
-}
-
-p {
-  font-size: 1.5rem;
-}
-
-h2 + p {
-  margin-top: 2rem;
+  box-sizing: border-box;
 }
 
 .logo {
   color: white;
-  margin-left: 1.5rem;
   font-family: "Fugaz One", cursive;
   white-space: nowrap;
-}
-
-.account {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-right: 10px;
-}
-
-.account .btn {
-  width: 6rem;
-  font-size: 1rem;
-}
-
-.btn {
-  border: 1px solid white;
-  padding: 0.5rem;
+  text-transform: uppercase;
   text-align: center;
-  white-space: nowrap;
-  border-radius: 100px;
-  margin: 1rem;
+  text-decoration: none;
 }
 
-.btn:hover {
-  color: #4eabe6;
-  background: white;
+#get-started {
+  font-size: 0.8vw;
 }
 
-.menu-bars {
-  display: none;
+#get-started:hover {
+  color: var(--primary-color);
+  background-color: white;
 }
 
 .landing {
@@ -89,408 +98,216 @@ h2 + p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
-  background: url("../images/green-flagstick.jpg") no-repeat fixed bottom;
+  width: 100%;
+  height: 100vh;
+  background: url("../images/green-flagstick.jpg") fixed;
   background-size: cover;
-  font-size: 3rem;
-  font-family: "Fugaz One", cursive;
-  text-align: center;
-  text-decoration: underline;
-  -webkit-text-decoration-color: #47e77a;
-  text-decoration-color: #47e77a;
-  padding-top: 15vh;
-  color: white;
 }
 
 .tagline {
+  font-family: "Fugaz One", cursive;
+  font-size: 3.5vw;
+  text-align: center;
+  text-decoration: underline var(--accent-color);
+  color: white;
+  background-color: rgba(128, 128, 128, 0.75);
+  border-radius: 100px;
+  padding: 5px 25px;
+}
+
+.explanation {
+  font-family: "Prompt", sans-serif;
+  font-size: 1.5vw;
+  text-align: center;
+  color: var(--primary-color);
+  background-color: var(--tertiary-color);
+  padding: 1rem;
+}
+
+.feature-list {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  background: rgba(105, 105, 105, 0.7);
-  border-radius: 100px;
-  padding: 2rem;
-  margin: 0px 10px 150px 10px;
+  margin-top: 1rem;
+  list-style-type: none;
 }
 
-.explanation,
-.filler {
-  background-color: #eeecec;
-  text-align: center;
-  font-family: "Prompt", sans-serif;
-  font-size: 2.5rem;
-  color: #4eabe6;
-  padding: 1rem 4rem;
+.feature {
+  margin: 0 2rem;
 }
 
-.stats {
-  display: flex;
-  flex-direction: column;
-  background-color: #4eabe6;
-  font-family: "Prompt", sans-serif;
-  color: white;
-  font-size: 2.5rem;
-  text-align: center;
-  padding: 1rem 0;
+.logout {
+  padding: 2px 35px;
+  font-size: 0.9vw;
 }
 
-.icon-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 1rem;
+.logout:hover {
+  color: var(--primary-color);
+  background-color: white;
 }
-
-.stat-icon {
-  display: flex;
-  flex-direction: column;
-}
-
-footer {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #4eabe6;
-  border-top: 0.5rem solid #47e77a;
-  text-align: center;
-  color: white;
-  padding: 1rem;
-}
-
-footer p {
-  font-size: 1rem;
-}
-
-/*
-  Log in page styles
-*/
 
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 90vh;
-  padding-top: 15vh;
-  background: url("../images/green-flagstick.jpg");
-  background-size: cover;
+  display: flex;
 }
 
-.log-in-box {
+.sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  font-family: "Prompt", sans-serif;
-  background: #4eabe6;
-  border: 3px solid #47e77a;
-  padding: 2rem;
-  margin-bottom: 15vh;
-}
-
-.log-in-box form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: "Prompt", sans-serif;
-  font-size: 1.5rem;
-  color: white;
-}
-
-form label {
-  margin-bottom: 10px;
-}
-
-form input {
-  width: 100%;
-  height: 25px;
-  margin: 0 0 20px 0;
-  padding: 5px;
-}
-
-form input[type="submit"] {
-  height: 2rem;
-  background-color: #4eabe6;
-  color: white;
-  font-size: 1rem;
-  /* Clears default styling on iOS Safari */
-  -webkit-appearance: none;
-  cursor: pointer;
-}
-
-/*
-  Dashboard syles
-*/
-
-.dash-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url("../images/course-aerial.jpg");
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-}
-
-.dash-grid {
-  width: 85vw;
-  height: 85vh;
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  font-family: "Prompt", sans-serif;
-  border-radius: 25px;
-}
-
-.dash-nav {
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(78, 171, 230, 0.8);
-  border-right: 5px solid #47e77a;
-  border-radius: 25px 0 0 25px;
-  color: white;
-  font-weight: normal;
-  padding: 1rem;
-}
-
-.dash-nav .logo {
+  height: 90vh;
+  width: 10vw;
+  background-color: var(--alt-primary-color);
   text-align: center;
-  border-bottom: 2px solid #47e77a;
-  margin: 0 5px 2rem 5px;
-  font-size: 1vw;
-  text-decoration: none;
-}
-
-.nav-elem {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 1rem;
-  border-radius: 15px 0 0 15px;
-  margin: 0 0 0 5px;
-  font-size: 1vw;
-}
-
-.nav-elem:hover,
-.nav-elem-current {
-  background-color: white;
-  color: #4eabe6;
-  cursor: pointer;
-}
-
-.nav-elem-heading {
-  font-weight: normal;
-  margin-left: 1rem;
-  white-space: nowrap;
-}
-
-.nav-elem i {
-  font-size: 1.5vw;
-}
-
-.dash-options {
-  display: flex;
-  justify-content: space-around;
-  margin-top: auto;
-}
-
-.dash-options a {
-  width: 50%;
-  text-align: center;
-  border-radius: 10px;
-  color: white;
-  font-size: 1.5vmax;
-}
-
-.dash-options a:hover {
-  color: #4eabe6;
-  background-color: white;
-}
-
-.dash-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 0 25px 25px 0;
-}
-
-.info-overview {
-  /* display: grid; */
-  display: none;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 3rem;
-  gap: 3rem;
-  padding: 3rem;
-  width: 100%;
-  height: 100%;
   box-sizing: border-box;
 }
 
-.overview-elem {
+.sidebar-link {
+  color: white;
+  font-family: "Prompt", sans-serif;
+  text-decoration: none;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.sidebar-link:hover,
+.active-menu {
+  background-color: var(--primary-color);
+  text-decoration: underline var(--accent-color);
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+  width: 90vw;
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+  font-family: "Prompt", sans-serif;
+}
+
+.content-item {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.scorecards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  padding: 1rem;
+}
+
+.form-group {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-scorecard {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-nine {
+  display: flex;
+}
+
+.hole-label {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  margin-bottom: 5px;
+  height: 50%;
+}
+
+.new-score-field {
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  width: 40px;
+  padding: 5px;
+  text-align: center;
+}
+
+.add-scorecard {
+  border: 2px solid var(--accent-color);
+  border-radius: 100px;
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  font-family: "Prompt", sans-serif;
+  font-size: 1rem;
+  padding: 10px;
+  width: 30%;
+  margin: 1rem auto;
+}
+
+.add-scorecard:hover {
+  cursor: pointer;
+}
+
+.add-scorecard:active {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+hr {
+  width: 75%;
+  border: 1px solid var(--primary-color);
+}
+
+.old-scorecards {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2rem 1rem;
+  padding: 1rem;
+}
+
+.old-scorecard {
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.trophies {
+  display: none;
+  grid-auto-columns: auto;
+  grid-auto-rows: auto;
+}
+
+.trophy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #4eabe6;
-  border: 3px solid #47e77a;
-  border-radius: 15px;
-}
-
-.overview-elem h2 {
-  color: white;
-  text-align: center;
-  font-weight: normal;
-  font-size: 1.5vw;
-}
-
-.overview-result {
-  color: white;
-  font-family: "Fugaz One", cursive;
-  font-size: 6vw;
-  align-self: center;
-}
-
-.info-tee-accuracy {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 75%;
-  width: 75%;
-  border: 3px solid #47e77a;
-  border-radius: 25px;
-  background-color: #4eabe6;
-}
-
-.tee-elem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #cbcbcb;
-  width: 25%;
-  height: 75%;
   margin: 1rem;
 }
 
-.tee-elem h3 {
+.badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  height: 100px;
+  width: 100px;
+  background-color: var(--primary-color);
+  border: 3px solid var(--accent-color);
+  font-family: "Fugaz One", cursive;
+  font-size: 2.5rem;
+  text-align: center;
   color: white;
-  font-family: "Prompt", sans-serif;
-  font-size: 2vw;
+  margin-bottom: 5px;
 }
 
-.tee-left {
-  /* background-color: #dd3254; */
-}
-
-.tee-center {
-  background-color: #47e77a;
-}
-
-.tee-right {
-  /* background-color: #dd3254; */
-}
-
-.info-gir {
-}
-
-.info-putting {
+.practice {
+  display: none;
 }
 
 /*
-  Media queries for mobile
+* Mobile Styles
 */
-
-@media screen and (max-width: 950px) {
-  .landing {
-    font-size: 2rem;
-    padding-top: 25vh;
-  }
-
-  .tagline {
-    padding: 1rem;
-  }
-
-  .icon-wrapper {
-    flex-direction: column;
-  }
-
-  .stat-icon {
-    margin: 1em 0;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  header {
-    padding: 1rem;
-  }
-
-  .logo {
-    margin: auto;
-  }
-
-  .account {
-    font-size: 1rem;
-    display: none;
-  }
-
-  .menu-bars {
-    display: block;
-    font-size: 1.5rem;
-    margin-right: 1rem;
-  }
-
-  .landing {
-    font-size: 1rem;
-    background-image: url("../images/fairway.jpg");
-    background-position: center;
-    background-attachment: initial;
-    padding-top: 15vh;
-  }
-
-  .tagline {
-    padding: 0.75rem;
-  }
-
-  .explanation,
-  .stats,
-  .filler {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  .explanation h2,
-  .stats h2,
-  .filler h2 {
-    font-size: 2rem;
-  }
-
-  .responsive {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: auto;
-  }
-
-  .responsive .btn {
-    width: 100%;
-    margin: 0.5rem;
-    font-size: 1.25rem;
-  }
-
-  .container {
-    background-image: url("../images/fairway.jpg");
-    background-position: center;
-    background-attachment: initial;
-  }
-
-  .log-in-box {
-    width: 80%;
-    padding: 1rem;
-  }
-
-  .log-in-box h2 {
-    font-size: 2rem;
-    width: 100%;
-    margin: 5px 0;
-  }
-
-  form input {
-    width: 100%;
-  }
-}
