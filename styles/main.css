@@ -20,6 +20,7 @@
   width: 50%;
   border-radius: 10px;
   box-sizing: border-box;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
   font-family: "Prompt", sans-serif;
 }
 
@@ -244,10 +245,13 @@ form {
   padding: 10px;
   width: 30%;
   margin: 1rem auto;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
 }
 
 .add-scorecard:hover {
   cursor: pointer;
+  position: relative;
+  top: -2px;
 }
 
 .add-scorecard:active {
@@ -270,6 +274,7 @@ hr {
 .old-scorecard {
   border: 2px solid var(--primary-color);
   border-radius: 15px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
   padding: 1rem;
   margin-bottom: 1rem;
 }

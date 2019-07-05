@@ -119,6 +119,7 @@ const newScorecard = (() => {
       scorecard.backNine[key] = 0;
     });
     scorecard.out = scorecard.in = scorecard.total = 0;
+    scorecard.isValid = false;
     scorecard.location = scorecard.date = null;
     updateScorecardUI();
   };
