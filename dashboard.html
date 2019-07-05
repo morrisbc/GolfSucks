@@ -4,76 +4,239 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+    <link rel="stylesheet" href="./styles/main.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Fugaz+One|Prompt"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-      crossorigin="anonymous"
-    />
-    <script src="scripts/main.js"></script>
+    <script src="https://kit.fontawesome.com/6bd74c8efd.js"></script>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <title>GolfSucks | Dashboard</title>
+    <title>Golf Sucks | Dashboard</title>
   </head>
-  <body class="dash-body">
-    <div class="dash-grid">
-      <div class="dash-nav">
-        <a class="logo" href="index.html"><h1>GOLF SUCKS</h1></a>
-        <div class="nav-elem dash-overview">
-          <i class="far fa-chart-bar"></i>
-          <h2 class="nav-elem-heading">Overview</h2>
+  <body>
+    <header>
+      <a class="logo" href="index.html"><h1>Golf Sucks</h1></a>
+      <a class="logout btn" href="index.html"
+        ><i class="fas fa-sign-out-alt"></i
+      ></a>
+    </header>
+    <div class="container container-row">
+      <aside class="sidebar">
+        <a id="scorecards-link" class="sidebar-link active-menu">Scorecards</a>
+        <a id="trophies-link" class="sidebar-link">Trophies</a>
+        <a id="practice-link" class="sidebar-link">Practice</a>
+      </aside>
+      <div class="main-content">
+        <div class="content-item scorecards">
+          <form class="new-scorecard">
+            <div class="new-nine new-front-nine">
+              <div class="form-group">
+                <label class="hole-label" for="hole-1">1</label>
+                <input
+                  id="hole-1"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-2">2</label>
+                <input
+                  id="hole-2"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-3">3</label>
+                <input
+                  id="hole-3"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-4">4</label>
+                <input
+                  id="hole-4"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-5">5</label>
+                <input
+                  id="hole-5"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-6">6</label>
+                <input
+                  id="hole-6"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-7">7</label>
+                <input
+                  id="hole-7"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-8">8</label>
+                <input
+                  id="hole-8"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-9">9</label>
+                <input
+                  id="hole-9"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="out">Out</label>
+                <input class="new-score-field" id="out" type="text" disabled />
+              </div>
+            </div>
+            <div class="new-nine new-back-nine">
+              <div class="form-group">
+                <label class="hole-label" for="hole-10">10</label>
+                <input
+                  id="hole-10"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-11">11</label>
+                <input
+                  id="hole-11"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-12">12</label>
+                <input
+                  id="hole-12"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-13">13</label>
+                <input
+                  id="hole-13"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-14">14</label>
+                <input
+                  id="hole-14"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-15">15</label>
+                <input
+                  id="hole-15"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-16">16</label>
+                <input
+                  id="hole-16"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-17">17</label>
+                <input
+                  id="hole-17"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="hole-18">18</label>
+                <input
+                  id="hole-18"
+                  class="new-score-field new-hole-score"
+                  type="number"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="in">In</label>
+                <input class="new-score-field" id="in" type="text" disabled />
+              </div>
+              <div class="form-group">
+                <label class="hole-label" for="total">Tot</label>
+                <input
+                  class="new-score-field"
+                  id="total"
+                  type="text"
+                  disabled
+                />
+              </div>
+            </div>
+            <input class="add-scorecard" type="submit" value="Add Scorecard" />
+          </form>
+          <hr />
+          <div class="old-scorecards"></div>
         </div>
-        <div class="nav-elem dash-tee-accuracy">
-          <i class="fas fa-crosshairs"></i>
-          <h2 class="nav-elem-heading">Tee Accuracy</h2>
-        </div>
-        <div class="nav-elem dash-gir">
-          <i class="far fa-circle"></i>
-          <h2 class="nav-elem-heading">GIR</h2>
-        </div>
-        <div class="nav-elem dash-putts">
-          <i class="fas fa-hand-holding-usd"></i>
-          <h2 class="nav-elem-heading">Putting</h2>
-        </div>
-        <div class="dash-options">
-          <a href="" class="settings"><i class="fas fa-cog"></i></a>
-          <a href="index.html" class="logout"
-            ><i class="fas fa-sign-out-alt"></i
-          ></a>
-        </div>
-      </div>
-      <div class="dash-info">
-        <div class="info-overview">
-          <div class="overview-elem overview-scoring">
-            <h2>Scoring</h2>
-            <h3 class="overview-result">83</h3>
+        <div class="content-item trophies">
+          <div class="trophy" data-trophy-name="rounds-played">
+            <div class="badge">-</div>
+            Rounds Played
           </div>
-          <div class="overview-elem overview-tee-accuracy">
-            <h2>Tee Accuracy</h2>
-            <h3 class="overview-result">65%</h3>
+          <div class="trophy" data-trophy-name="lowest-9">
+            <div class="badge">-</div>
+            Lowest 9
           </div>
-          <div class="overview-elem overview-gir">
-            <h2>Greens In Regulation</h2>
-            <h3 class="overview-result">10</h3>
-          </div>
-          <div class="overview-elem overview-putts">
-            <h2>Putting</h2>
-            <h3 class="overview-result">36</h3>
+          <div class="trophy" data-trophy-name="lowest-18">
+            <div class="badge">-</div>
+            Lowest 18
           </div>
         </div>
-        <div class="info-tee-accuracy">
-          <div class="tee-elem tee-left"><h3>35%</h3></div>
-          <div class="tee-elem tee-center"><h3>55%</h3></div>
-          <div class="tee-elem tee-right"><h3>10%</h3></div>
-        </div>
-        <div class="info-gir"></div>
-        <div class="info-putting"></div>
+        <div class="content-item practice">Practice</div>
       </div>
     </div>
-    <script src="./scripts/main.js"></script>
+
+    <script src="./scripts/storage.js"></script>
+    <script src="./scripts/scorecard.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
