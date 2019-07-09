@@ -118,7 +118,8 @@ footer {
   font-family: "Fugaz One", cursive;
   font-size: 4rem;
   text-align: center;
-  text-decoration: underline var(--accent-color);
+  text-decoration-line: underline;
+  text-decoration-color: var(--accent-color);
   color: white;
   background-color: rgba(128, 128, 128, 0.75);
   border-radius: 100px;
@@ -347,6 +348,7 @@ hr {
   #get-started {
     display: none;
     width: 70%;
+    margin-top: 10px;
   }
 
   .tagline {
