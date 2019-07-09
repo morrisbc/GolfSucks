@@ -27,7 +27,7 @@ const storage = (() => {
       return trophies;
     } else {
       return {
-        roundsPlayed: 0,
+        scorecardsPosted: 0,
         lowest9: 0,
         lowest18: 0
       };

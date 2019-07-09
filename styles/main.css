@@ -74,6 +74,19 @@ footer {
   text-align: center;
   color: white;
   box-sizing: border-box;
+  padding: 1rem 0;
+}
+
+.mobile-wrap {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mobile-menu {
+  display: none;
+  color: white;
+  font-size: 2rem;
 }
 
 .logo {
@@ -83,10 +96,6 @@ footer {
   text-transform: uppercase;
   text-align: center;
   text-decoration: none;
-}
-
-#get-started {
-  font-size: 0.8vw;
 }
 
 #get-started:hover {
@@ -107,7 +116,7 @@ footer {
 
 .tagline {
   font-family: "Fugaz One", cursive;
-  font-size: 3.5vw;
+  font-size: 4rem;
   text-align: center;
   text-decoration: underline var(--accent-color);
   color: white;
@@ -118,7 +127,7 @@ footer {
 
 .explanation {
   font-family: "Prompt", sans-serif;
-  font-size: 1.5vw;
+  font-size: 2rem;
   text-align: center;
   color: var(--primary-color);
   background-color: var(--tertiary-color);
@@ -138,13 +147,16 @@ footer {
 
 .logout {
   padding: 2px 35px;
-  font-size: 0.9vw;
 }
 
 .logout:hover {
   color: var(--primary-color);
   background-color: white;
 }
+
+/**
+* Dashboard Styles
+**/
 
 .container {
   height: 90vh;
@@ -316,3 +328,40 @@ hr {
 /*
 * Mobile Styles
 */
+
+@media screen and (max-width: 450px) {
+  #landing-header {
+    flex-direction: column;
+    justify-content: space-around;
+    height: auto;
+  }
+
+  .mobile-wrap {
+    width: 100%;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  #get-started {
+    display: none;
+    width: 70%;
+  }
+
+  .tagline {
+    font-size: 1.5rem;
+  }
+
+  .explanation {
+    font-size: 1rem;
+  }
+
+  .feature-list {
+    flex-direction: column;
+  }
+
+  .feature {
+    margin: 10px 0;
+  }
+}
