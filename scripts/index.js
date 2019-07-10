@@ -17,9 +17,9 @@ const app = (() => {
       storageMod.addScorecardToStorage(scorecardMod.scorecard);
       scorecards = storageMod.getScorecardsFromStorage();
       showAlert("alert-success", "Scorecard Added!");
-      scorecardMod.clearScorecard();
       updateScorecardsUI();
       updateTrophies();
+      scorecardMod.clearScorecard();
     } else {
       showAlert("alert-danger", "Please submit a valid scorecard.");
     }
@@ -41,7 +41,29 @@ const app = (() => {
   };
 
   const updateTrophies = () => {
+    // Update rounds posted trophy
     trophies.scorecardsPosted = scorecards.length;
+
+    // Update the lowest 9 trophy
+    if (scorecardMod.scorecard.out > 0 && trophies.lowest9 > 0) {
+      trophies.lowest9 = Math.min(trophies.lowest9, scorecardMod.scorecard.out);
+    } else {
+      trophies.lowest9 = scorecardMod.scorecard.out;
+    }
+
+    if (scorecardMod.scorecard.in > 0) {
+      trophies.lowest9 = Math.min(trophies.lowest9, scorecardMod.scorecard.in);
+    }
+
+    // Update the lowest 18 trophy
+    if (scorecardMod.scorecard.out > 0 && scorecardMod.scorecard.in > 0) {
+      trophies.lowest18 =
+        trophies.lowest18 === 0
+          ? scorecardMod.scorecard.total
+          : Math.min(trophies.lowest18, scorecardMod.scorecard.total);
+    }
+
+    // Store the new trophy values back in storage
     storageMod.addTrophiesToStorage(trophies);
   };
 

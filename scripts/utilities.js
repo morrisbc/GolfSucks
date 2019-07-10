@@ -11,8 +11,6 @@ const utilities = (() => {
   const showSidebar = () => {
     const sidebar = document.querySelector(".sidebar");
 
-    console.log(sidebar.className);
-
     if (
       sidebar.className === "sidebar" ||
       sidebar.className === "sidebar slideout"
