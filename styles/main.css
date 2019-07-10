@@ -47,6 +47,8 @@
 }
 
 header {
+  position: fixed;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -56,6 +58,10 @@ header {
   box-sizing: border-box;
   padding: 1rem;
 }
+
+/**
+* Landing Page Styles
+**/
 
 #landing-header {
   position: fixed;
@@ -74,7 +80,7 @@ footer {
   text-align: center;
   color: white;
   box-sizing: border-box;
-  padding: 1rem 0;
+  padding: 2.5rem 0;
 }
 
 .mobile-wrap {
@@ -146,25 +152,18 @@ footer {
   margin: 0 2rem;
 }
 
-.logout {
-  padding: 2px 35px;
-}
-
-.logout:hover {
-  color: var(--primary-color);
-  background-color: white;
-}
-
 /**
 * Dashboard Styles
 **/
 
 .container {
+  padding-top: 10vh;
   height: 90vh;
   display: flex;
 }
 
 .sidebar {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 90vh;
@@ -186,6 +185,14 @@ footer {
 .active-menu {
   background-color: var(--primary-color);
   text-decoration: underline var(--accent-color);
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
+  align-self: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .main-content {
@@ -259,6 +266,7 @@ form {
   width: 30%;
   margin: 1rem auto;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+  -webkit-appearance: none;
 }
 
 .add-scorecard:hover {
@@ -331,6 +339,10 @@ hr {
 */
 
 @media screen and (max-width: 450px) {
+  .alert {
+    width: 100%;
+  }
+
   #landing-header {
     flex-direction: column;
     justify-content: space-around;
@@ -365,5 +377,52 @@ hr {
 
   .feature {
     margin: 10px 0;
+  }
+
+  .main-content {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  hr {
+    width: 100%;
+  }
+
+  @keyframes slidein {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 50%;
+    }
+  }
+
+  @keyframes slideout {
+    from {
+      width: 50%;
+    }
+
+    to {
+      width: 0;
+    }
+  }
+
+  .slidein {
+    animation: 0.5s slidein forwards;
+  }
+
+  .slideout {
+    animation: 0.5s slideout forwards;
+  }
+
+  .sidebar {
+    width: 0;
+    overflow: hidden;
+    position: fixed;
+  }
+
+  .logout {
+    bottom: 8rem;
   }
 }
