@@ -138,9 +138,3 @@ const app = (() => {
     link.addEventListener("click", changeMenu);
   });
 })();
-
-// window.onresize = () => {
-//   document.body.style.height = window.innerHeight + "px";
-// };
-
-// window.onresize();
