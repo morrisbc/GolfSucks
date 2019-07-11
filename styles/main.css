@@ -201,7 +201,6 @@ footer {
   align-items: center;
   height: 90vh;
   width: 90vw;
-  padding: 2rem;
   box-sizing: border-box;
   overflow-y: auto;
   font-family: "Prompt", sans-serif;
@@ -211,6 +210,8 @@ footer {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  padding: 2rem;
+  overflow-y: auto;
 }
 
 .scorecards {
@@ -219,14 +220,11 @@ footer {
   align-items: center;
 }
 
-.mobile-row {
-  display: flex;
-}
-
 .form-group {
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .new-scorecard {
@@ -285,11 +283,6 @@ footer {
   color: var(--primary-color);
 }
 
-hr {
-  width: 75%;
-  border: 1px solid var(--primary-color);
-}
-
 .old-scorecards {
   display: flex;
   flex-direction: column;
@@ -308,6 +301,8 @@ hr {
 .trophies {
   display: none;
   grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+  height: auto;
 }
 
 .trophy {
@@ -316,21 +311,22 @@ hr {
   justify-content: center;
   align-items: center;
   margin: 1rem;
+  text-align: center;
 }
 
 .badge {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
   height: 100px;
   width: 100px;
   background-color: var(--primary-color);
+  color: white;
   border: 3px solid var(--accent-color);
+  border-radius: 15px;
   font-family: "Fugaz One", cursive;
   font-size: 2.5rem;
   text-align: center;
-  color: white;
   margin-bottom: 5px;
 }
 
@@ -385,12 +381,7 @@ hr {
 
   .main-content {
     width: 100%;
-    overflow-x: hidden;
-    padding: 1rem;
-  }
-
-  hr {
-    width: 100%;
+    height: auto;
   }
 
   @keyframes slidein {
@@ -436,28 +427,11 @@ hr {
     bottom: 7rem;
   }
 
-  .new-scorecard {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-
   .new-nine {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: start;
     width: 100%;
-  }
-
-  .mobile-row {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .form-group {
-    margin: 1rem;
-  }
-
-  .hole-label {
-    margin-bottom: 10px;
   }
 
   .add-scorecard {
@@ -466,7 +440,15 @@ hr {
     padding: 1rem;
   }
 
+  .old-scorecards {
+    width: 100%;
+  }
+
+  .old-scorecard {
+    overflow-wrap: break-word;
+  }
+
   .trophies {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }

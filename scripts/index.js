@@ -45,14 +45,26 @@ const app = (() => {
     trophies.scorecardsPosted = scorecards.length;
 
     // Update the lowest 9 trophy
-    if (scorecardMod.scorecard.out > 0 && trophies.lowest9 > 0) {
-      trophies.lowest9 = Math.min(trophies.lowest9, scorecardMod.scorecard.out);
-    } else {
-      trophies.lowest9 = scorecardMod.scorecard.out;
+    if (scorecardMod.scorecard.out > 0) {
+      if (trophies.lowest9 === 0) {
+        trophies.lowest9 = scorecardMod.scorecard.out;
+      } else {
+        trophies.lowest9 = Math.min(
+          trophies.lowest9,
+          scorecardMod.scorecard.out
+        );
+      }
     }
 
     if (scorecardMod.scorecard.in > 0) {
-      trophies.lowest9 = Math.min(trophies.lowest9, scorecardMod.scorecard.in);
+      if (trophies.lowest9 === 0) {
+        trophies.lowest9 = scorecardMod.scorecard.in;
+      } else {
+        trophies.lowest9 = Math.min(
+          trophies.lowest9,
+          scorecardMod.scorecard.in
+        );
+      }
     }
 
     // Update the lowest 18 trophy
