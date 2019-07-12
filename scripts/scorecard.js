@@ -40,6 +40,9 @@ const newScorecard = (() => {
     date: null
   };
 
+  /**
+   * Updates the scorecard UI based on the values in the scorecard object.
+   */
   const updateScorecardUI = () => {
     frontNineElems.forEach((holeInput, holeNumber) => {
       holeInput.value = scorecard.frontNine[holeNumber + 1] || "";
@@ -54,6 +57,9 @@ const newScorecard = (() => {
     totalElem.value = scorecard.total || "";
   };
 
+  /**
+   * Calculates the front nine score and updates the scorecard object.
+   */
   const calculateFrontNineScore = () => {
     let outScore = 0;
     let invalidHoleScore = false;
@@ -78,6 +84,9 @@ const newScorecard = (() => {
     }
   };
 
+  /**
+   * Calculates the back nine score and updates the scorecard object.
+   */
   const calculateBackNineScore = () => {
     let inScore = 0;
     let invalidHoleScore = false;
@@ -85,7 +94,7 @@ const newScorecard = (() => {
     backNineElems.forEach((holeInput, holeNumber) => {
       const holeScore = parseInt(holeInput.value);
 
-      // Validate hole input and add it to the front nine total
+      // Validate hole input and add it to the back nine total
       if (!isNaN(holeScore) && holeScore > 0) {
         inScore += holeScore;
         scorecard.backNine[holeNumber + 10] = holeScore;
@@ -102,15 +111,26 @@ const newScorecard = (() => {
     }
   };
 
+  /**
+   * Calculates the total score for the scorecard and updates the scorecard
+   * object.
+   */
   const calculateTotalScore = () => {
     scorecard.total = scorecard.out + scorecard.in || 0;
   };
 
+  /**
+   * Checks the scorecard object's values for validity and writes the result
+   * to the scorecard object.
+   */
   const validateScorecard = () => {
     scorecard.isValid =
       scorecard.total > 0 && (scorecard.out > 0 || scorecard.in > 0);
   };
 
+  /**
+   * Clears the scoreard's values and updates the scorecard UI.
+   */
   const clearScorecard = () => {
     Object.keys(scorecard.frontNine).forEach(key => {
       scorecard.frontNine[key] = 0;

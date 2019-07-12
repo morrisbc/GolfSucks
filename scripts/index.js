@@ -10,6 +10,12 @@ const app = (() => {
   const scorecardsUI = document.querySelector(".old-scorecards");
   const trophiesUI = document.querySelector(".trophies");
 
+  /**
+   * Adds a new scorecard to the application, saving the new scorecard
+   * to storage, and updating the UI.
+   *
+   * @param {Event} e Event to prevent default behavior of submit
+   */
   const addScorecard = e => {
     e.preventDefault();
 
@@ -25,6 +31,9 @@ const app = (() => {
     }
   };
 
+  /**
+   * Updates the scorecards UI
+   */
   const updateScorecardsUI = () => {
     scorecardsUI.innerHTML = "";
     if (scorecards.length !== 0) {
@@ -40,6 +49,9 @@ const app = (() => {
     }
   };
 
+  /**
+   * Updates the trophies in the application and writes them to storage.
+   */
   const updateTrophies = () => {
     // Update rounds posted trophy
     trophies.scorecardsPosted = scorecards.length;
@@ -79,6 +91,9 @@ const app = (() => {
     storageMod.addTrophiesToStorage(trophies);
   };
 
+  /**
+   * Updates the UI for the trophies section of the application.
+   */
   const updateTrophiesUI = () => {
     for (let trophy of trophiesUI.children) {
       // Convert the hyphen-separated data attribute to camelCase
@@ -90,6 +105,12 @@ const app = (() => {
     }
   };
 
+  /**
+   * Displays an alert before the scorecards section of the application.
+   *
+   * @param {String} modifier The type of the alert affecting styling
+   * @param {String} message The content of the alert
+   */
   const showAlert = (modifier, message) => {
     const scorecards = document.querySelector(".scorecards");
 
@@ -108,6 +129,11 @@ const app = (() => {
     }
   };
 
+  /**
+   * Changes the active menu of the application.
+   *
+   * @param {Event} e Used to determine the selected sidebar option
+   */
   const changeMenu = e => {
     const newMenu = document.querySelector(
       `.${e.target.innerText.toLowerCase()}`
@@ -129,6 +155,22 @@ const app = (() => {
     activeMenuLink = newMenuLink;
   };
 
+  /**
+   * Toggles the visibility of the sidebar menu on mobile.
+   */
+  const toggleSidebar = () => {
+    const sidebar = document.querySelector(".sidebar");
+
+    if (
+      sidebar.className === "sidebar" ||
+      sidebar.className === "sidebar slideout"
+    ) {
+      sidebar.className = "sidebar slidein";
+    } else {
+      sidebar.className = "sidebar slideout";
+    }
+  };
+
   // Add event listeners
   document.addEventListener("DOMContentLoaded", updateScorecardsUI);
   document
@@ -137,4 +179,7 @@ const app = (() => {
   document.querySelectorAll(".sidebar-link").forEach(link => {
     link.addEventListener("click", changeMenu);
   });
+  document
+    .querySelector(".mobile-menu")
+    .addEventListener("click", toggleSidebar);
 })();
