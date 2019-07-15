@@ -22,12 +22,16 @@ const app = (() => {
     if (scorecardMod.scorecard.isValid) {
       storageMod.addScorecardToStorage(scorecardMod.scorecard);
       scorecards = storageMod.getScorecardsFromStorage();
-      showAlert("alert-success", "Scorecard Added!");
+      showAlert(".new-scorecard", "alert-success", "Scorecard Added!");
       updateScorecardsUI();
       updateTrophies();
       scorecardMod.clearScorecard();
     } else {
-      showAlert("alert-danger", "Please submit a valid scorecard.");
+      showAlert(
+        ".new-scorecard",
+        "alert-danger",
+        "Please submit a valid scorecard."
+      );
     }
   };
 
@@ -108,11 +112,13 @@ const app = (() => {
   /**
    * Displays an alert before the scorecards section of the application.
    *
+   * @param {String} elemSelector The selector of the UI element to insert the
+   *                              alert after
    * @param {String} modifier The type of the alert affecting styling
    * @param {String} message The content of the alert
    */
-  const showAlert = (modifier, message) => {
-    const scorecards = document.querySelector(".scorecards");
+  const showAlert = (elemSelector, modifier, message) => {
+    const elemUI = document.querySelector(`${elemSelector}`);
 
     if (document.querySelector(`.alert.${modifier}`) === null) {
       const newAlert = document.createElement("div");
@@ -121,10 +127,10 @@ const app = (() => {
       const alertText = document.createTextNode(message);
       newAlert.appendChild(alertText);
 
-      scorecards.prepend(newAlert);
+      elemUI.append(newAlert);
 
       setTimeout(() => {
-        scorecards.removeChild(newAlert);
+        elemUI.removeChild(newAlert);
       }, 2500);
     }
   };
