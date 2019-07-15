@@ -19,7 +19,7 @@
   padding: 1rem;
   margin: 1rem;
   text-align: center;
-  width: 50%;
+  width: 100%;
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
@@ -60,8 +60,6 @@
   font-family: "Prompt", sans-serif;
   font-size: 1rem;
   padding: 10px;
-  margin-top: 1rem;
-  width: 30%;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
   -webkit-appearance: none;
 }
@@ -286,6 +284,17 @@ footer {
   font-size: 1rem;
 }
 
+#out,
+#in,
+#total {
+  border: 2px solid var(--accent-color);
+}
+
+#add-scorecard {
+  margin-top: 1rem;
+  width: 30%;
+}
+
 .old-scorecards {
   display: flex;
   flex-direction: column;
@@ -300,6 +309,10 @@ footer {
   padding: 1rem;
   margin-bottom: 1rem;
 }
+
+/*
+* Trophies Styles
+*/
 
 .trophies {
   display: none;
@@ -365,13 +378,14 @@ footer {
 #time-end {
   border: 2px solid var(--primary-color);
   border-radius: 10px;
-  padding: 5px 10px;
   font-size: 1rem;
+  text-align: center;
 }
 
 .practice-type {
   display: flex;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 #type-range {
@@ -386,8 +400,9 @@ footer {
   margin-left: 1rem;
 }
 
-#notes-label {
-  margin-top: 1rem;
+.notes-wrap {
+  display: flex;
+  flex-direction: column;
 }
 
 #practice-notes {
@@ -396,6 +411,11 @@ footer {
   padding: 10px;
   resize: none;
   font-size: 1rem;
+}
+
+#add-practice {
+  margin-top: 1rem;
+  width: 100%;
 }
 
 /*

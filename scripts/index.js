@@ -109,6 +109,16 @@ const app = (() => {
     }
   };
 
+  const addPractice = e => {
+    e.preventDefault();
+
+    showAlert(
+      ".practice-form",
+      "alert-danger",
+      "I haven't implemented this yet!"
+    );
+  };
+
   /**
    * Displays an alert before the scorecards section of the application.
    *
@@ -159,6 +169,8 @@ const app = (() => {
 
     activeMenu = newMenu;
     activeMenuLink = newMenuLink;
+
+    toggleSidebar();
   };
 
   /**
@@ -185,6 +197,9 @@ const app = (() => {
   document.querySelectorAll(".sidebar-link").forEach(link => {
     link.addEventListener("click", changeMenu);
   });
+  document
+    .getElementById("add-practice")
+    .addEventListener("click", addPractice);
   document
     .querySelector(".mobile-menu")
     .addEventListener("click", toggleSidebar);

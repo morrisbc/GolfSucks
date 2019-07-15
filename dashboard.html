@@ -238,6 +238,7 @@
         </div>
         <div class="content-item practice">
           <form class="practice-form">
+            <h3>When did you practice?</h3>
             <div class="practice-time">
               <div class="time-wrap">
                 <label for="time-start">Practice Start:</label>
@@ -248,8 +249,9 @@
                 <input type="datetime-local" name="" id="time-end" />
               </div>
             </div>
+            <h3>What did you work on?</h3>
             <div class="practice-type">
-              <label for="type-range">Practice Range:</label>
+              <label for="type-range">Full Swing:</label>
               <div id="type-range">
                 <div>
                   <input type="checkbox" name="" id="range-driver" />
@@ -272,8 +274,12 @@
                   <label for="range-wedges">Wedges</label>
                 </div>
               </div>
-              <label id="green-label" for="type-green">Practice Green:</label>
+              <label id="green-label" for="type-green">Short Game:</label>
               <div id="type-green">
+                <div>
+                  <input type="checkbox" name="" id="green-pitching" />
+                  <label for="green-pitching">Pitching</label>
+                </div>
                 <div>
                   <input type="checkbox" name="" id="green-chipping" />
                   <label for="green-chipping">Chipping</label>
@@ -284,16 +290,17 @@
                 </div>
               </div>
             </div>
-            <label id="notes-label" for="practice-notes"
-              >Notes (255 characters max):</label
-            >
-            <textarea
-              name=""
-              id="practice-notes"
-              cols="30"
-              rows="9"
-              maxlength="255"
-            ></textarea>
+            <h3>Anything else?</h3>
+            <div class="notes-wrap">
+              <label for="practice-notes">Notes (255 characters max):</label>
+              <textarea
+                name=""
+                id="practice-notes"
+                cols="30"
+                rows="9"
+                maxlength="255"
+              ></textarea>
+            </div>
             <input
               id="add-practice"
               class="submit-btn btn"
