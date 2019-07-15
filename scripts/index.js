@@ -174,7 +174,7 @@ const app = (() => {
   // Add event listeners
   document.addEventListener("DOMContentLoaded", updateScorecardsUI);
   document
-    .querySelector(".add-scorecard")
+    .getElementById("add-scorecard")
     .addEventListener("click", addScorecard);
   document.querySelectorAll(".sidebar-link").forEach(link => {
     link.addEventListener("click", changeMenu);

@@ -46,6 +46,35 @@
   color: white;
 }
 
+.submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  border: 2px solid var(--accent-color);
+  border-radius: 100px;
+  background-color: var(--primary-color);
+  color: white;
+  font-family: "Prompt", sans-serif;
+  font-size: 1rem;
+  padding: 10px;
+  margin-top: 1rem;
+  width: 30%;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+  -webkit-appearance: none;
+}
+
+.submit-btn:hover {
+  cursor: pointer;
+  position: relative;
+  top: -2px;
+}
+
+.submit-btn:active {
+  background-color: white;
+  color: var(--primary-color);
+}
+
 header {
   position: fixed;
   width: 100%;
@@ -60,9 +89,9 @@ header {
   z-index: 1;
 }
 
-/**
+/*
 * Landing Page Styles
-**/
+*/
 
 #landing-header {
   position: fixed;
@@ -153,9 +182,9 @@ footer {
   margin: 0 2rem;
 }
 
-/**
+/*
 * Dashboard Styles
-**/
+*/
 
 .container {
   padding-top: 10vh;
@@ -255,40 +284,11 @@ footer {
   font-size: 1rem;
 }
 
-.add-scorecard {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  border: 2px solid var(--accent-color);
-  border-radius: 100px;
-  background-color: var(--primary-color);
-  color: white;
-  font-family: "Prompt", sans-serif;
-  font-size: 1rem;
-  padding: 10px;
-  margin-top: 1rem;
-  width: 30%;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
-  -webkit-appearance: none;
-}
-
-.add-scorecard:hover {
-  cursor: pointer;
-  position: relative;
-  top: -2px;
-}
-
-.add-scorecard:active {
-  background-color: white;
-  color: var(--primary-color);
-}
-
 .old-scorecards {
   display: flex;
   flex-direction: column;
   margin: 1rem 2rem 1rem;
-  /* padding: 1rem; */
+  text-align: center;
 }
 
 .old-scorecard {
@@ -331,8 +331,69 @@ footer {
   margin-bottom: 5px;
 }
 
+/*
+* Practice Styles
+*/
+
 .practice {
   display: none;
+  justify-content: center;
+  height: auto;
+  padding: 1rem;
+}
+
+.practice-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.practice-time {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.time-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+#time-start,
+#time-end {
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
+.practice-type {
+  display: flex;
+  justify-content: center;
+}
+
+#type-range {
+  margin: 0 1rem;
+}
+
+#green-label {
+  margin-left: 1rem;
+}
+
+#type-green {
+  margin-left: 1rem;
+}
+
+#notes-label {
+  margin-top: 1rem;
+}
+
+#practice-notes {
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  padding: 10px;
+  resize: none;
+  font-size: 1rem;
 }
 
 /*
@@ -447,7 +508,7 @@ footer {
     width: 100%;
   }
 
-  .add-scorecard {
+  #add-scorecard {
     width: 90%;
   }
 
@@ -461,6 +522,39 @@ footer {
 
   .trophies {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .practice-form {
+    width: 100%;
+  }
+
+  .practice-form input[type="checkbox"] {
+    transform: scale(1.5);
+    margin: 0.5rem;
+  }
+
+  .practice-time {
+    flex-direction: column;
+  }
+
+  .practice-type {
+    flex-direction: column;
+  }
+
+  #type-range {
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  #green-label {
+    margin: 0;
+  }
+
+  #type-green {
+    margin: 0.5rem 0 0 0;
+  }
+
+  #add-practice {
+    width: 100%;
   }
 }
 

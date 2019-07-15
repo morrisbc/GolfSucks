@@ -213,7 +213,12 @@
                 />
               </div>
             </div>
-            <input class="add-scorecard" type="submit" value="Add Scorecard" />
+            <input
+              id="add-scorecard"
+              class="submit-btn"
+              type="submit"
+              value="Add Scorecard"
+            />
           </form>
           <div class="old-scorecards"></div>
         </div>
@@ -231,7 +236,73 @@
             Lowest 18
           </div>
         </div>
-        <div class="content-item practice">Practice</div>
+        <div class="content-item practice">
+          <form class="practice-form">
+            <div class="practice-time">
+              <div class="time-wrap">
+                <label for="time-start">Practice Start:</label>
+                <input type="datetime-local" name="" id="time-start" />
+              </div>
+              <div class="time-wrap">
+                <label for="time-end">Practice End:</label>
+                <input type="datetime-local" name="" id="time-end" />
+              </div>
+            </div>
+            <div class="practice-type">
+              <label for="type-range">Practice Range:</label>
+              <div id="type-range">
+                <div>
+                  <input type="checkbox" name="" id="range-driver" />
+                  <label for="range-driver">Driver</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="" id="range-woods" />
+                  <label for="range-woods">Woods/Hybrids</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="" id="range-longirons" />
+                  <label for="range-longirons">Long Irons</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="" id="range-shortirons" />
+                  <label for="range-shortirons">Short Irons</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="" id="range-wedges" />
+                  <label for="range-wedges">Wedges</label>
+                </div>
+              </div>
+              <label id="green-label" for="type-green">Practice Green:</label>
+              <div id="type-green">
+                <div>
+                  <input type="checkbox" name="" id="green-chipping" />
+                  <label for="green-chipping">Chipping</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="" id="green-putting" />
+                  <label for="green-putting">Putting</label>
+                </div>
+              </div>
+            </div>
+            <label id="notes-label" for="practice-notes"
+              >Notes (255 characters max):</label
+            >
+            <textarea
+              name=""
+              id="practice-notes"
+              cols="30"
+              rows="9"
+              maxlength="255"
+            ></textarea>
+            <input
+              id="add-practice"
+              class="submit-btn btn"
+              type="submit"
+              value="Add Practice"
+            />
+          </form>
+          <div class="practice-sessions"></div>
+        </div>
       </div>
     </div>
 
