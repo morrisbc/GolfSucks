@@ -22,13 +22,13 @@ const app = (() => {
     if (scorecardMod.scorecard.isValid) {
       storageMod.addScorecardToStorage(scorecardMod.scorecard);
       scorecards = storageMod.getScorecardsFromStorage();
-      showAlert(".new-scorecard", "alert-success", "Scorecard Added!");
+      showAlert("#add-scorecard", "alert-success", "Scorecard Added!");
       updateScorecardsUI();
       updateTrophies();
       scorecardMod.clearScorecard();
     } else {
       showAlert(
-        ".new-scorecard",
+        "#add-scorecard",
         "alert-danger",
         "Please submit a valid scorecard."
       );
@@ -113,7 +113,7 @@ const app = (() => {
     e.preventDefault();
 
     showAlert(
-      ".practice-form",
+      "#add-practice",
       "alert-danger",
       "I haven't implemented this yet!"
     );
@@ -137,10 +137,11 @@ const app = (() => {
       const alertText = document.createTextNode(message);
       newAlert.appendChild(alertText);
 
-      elemUI.append(newAlert);
+      // elemUI.append(newAlert);
+      elemUI.parentElement.insertBefore(newAlert, elemUI);
 
       setTimeout(() => {
-        elemUI.removeChild(newAlert);
+        elemUI.parentElement.removeChild(newAlert);
       }, 2500);
     }
   };
