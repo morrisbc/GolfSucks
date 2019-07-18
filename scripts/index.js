@@ -1,6 +1,7 @@
 const app = (() => {
   const scorecardMod = newScorecard;
   const storageMod = storage;
+  const practiceMod = practice;
 
   let scorecards = storageMod.getScorecardsFromStorage();
   let trophies = storageMod.getTrophiesFromStorage();
@@ -9,6 +10,7 @@ const app = (() => {
   let activeMenuLink = document.getElementById("scorecards-link");
   const scorecardsUI = document.querySelector(".old-scorecards");
   const trophiesUI = document.querySelector(".trophies");
+  const practicesUI = document.querySelector(".practice-sessions");
 
   /**
    * Adds a new scorecard to the application, saving the new scorecard
@@ -111,12 +113,31 @@ const app = (() => {
 
   const addPractice = e => {
     e.preventDefault();
+    const practiceSession = practiceMod.getPractice();
 
-    showAlert(
-      "#add-practice",
-      "alert-danger",
-      "I haven't implemented this yet!"
-    );
+    if (practiceSession !== null) {
+      updatePracticeUI();
+      showAlert("#add-practice", "alert-success", "Practice session added!");
+    } else {
+      showAlert(
+        "#add-practice",
+        "alert-danger",
+        "Please submit a valid practice session."
+      );
+    }
+  };
+
+  /**
+   * Clears the practice form and adds a new practice session to the list in
+   * the UI.
+   */
+  const updatePracticeUI = () => {
+    practicesUI.innerHTML += `
+      <div class="practice-session">
+        ${JSON.stringify(practiceMod.getPractice())}
+      </div>
+      `;
+    practiceMod.clearPracticeForm();
   };
 
   /**

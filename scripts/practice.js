@@ -26,6 +26,32 @@ const practice = (() => {
   };
 
   /**
+   * Clears the practice form UI and reinitializes the practice session member
+   * object.
+   */
+  const clearPracticeForm = () => {
+    practiceSession.startTime = null;
+    practiceSession.endTime = null;
+    fullSwing.forEach(clubType => {
+      practiceSession.fullSwing[clubType.name] = false;
+    });
+    shortGame.forEach(clubType => {
+      practiceSession.shortGame[clubType.name] = false;
+    });
+    practiceSession.notes = "";
+
+    practiceStart.value = "";
+    practiceEnd.value = "";
+    fullSwing.forEach(checkbox => {
+      checkbox.checked = false;
+    });
+    shortGame.forEach(checkbox => {
+      checkbox.checked = false;
+    });
+    notes.value = "";
+  };
+
+  /**
    * Checks the practice form element values for validity and returns a boolean
    * based on the results.
    *
@@ -87,7 +113,12 @@ const practice = (() => {
     }
   };
 
-  document.getElementById("add-practice").addEventListener("click", () => {
-    console.log(getPractice());
-  });
+  return {
+    getPractice,
+    clearPracticeForm
+  };
+
+  // document.getElementById("add-practice").addEventListener("click", () => {
+  //   console.log(getPractice());
+  // });
 })();
