@@ -443,7 +443,7 @@ footer {
   }
 
   .new-nine {
-    grid-template-columns: repeat(auto-fill, 86px);
+    grid-template-columns: repeat(auto-fill, 85px);
   }
 
   .old-scorecards {
@@ -452,54 +452,19 @@ footer {
   }
 }
 
-@media screen and (max-width: 500px) {
-  .alert {
-    width: 100%;
+@media screen and (max-width: 750px) {
+  .trophies {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
 
-  #landing-header {
-    flex-direction: column;
-    justify-content: space-around;
-    height: auto;
-  }
-
+@media screen and (max-width: 700px) {
   .mobile-wrap {
     width: 100%;
   }
 
   .mobile-menu {
     display: block;
-  }
-
-  #get-started {
-    display: none;
-    width: 70%;
-    margin-top: 10px;
-  }
-
-  .tagline {
-    font-size: 1.5rem;
-  }
-
-  .explanation {
-    font-size: 1rem;
-  }
-
-  .feature-list {
-    flex-direction: column;
-  }
-
-  .feature {
-    margin: 10px 0;
-  }
-
-  .container {
-    height: auto;
-  }
-
-  .main-content {
-    width: 100%;
-    height: auto;
   }
 
   @keyframes slidein {
@@ -536,6 +501,71 @@ footer {
     position: fixed;
     z-index: 1;
   }
+}
+
+@media screen and (max-width: 535px) {
+  .practice-type {
+    flex-direction: column;
+  }
+
+  .time-wrap {
+    width: 45%;
+  }
+
+  #type-range {
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  #green-label {
+    margin: 0;
+  }
+
+  #type-green {
+    margin: 0.5rem 0 0 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .alert {
+    width: 100%;
+  }
+
+  #landing-header {
+    flex-direction: column;
+    justify-content: space-around;
+    height: auto;
+  }
+
+  #get-started {
+    display: none;
+    width: 70%;
+    margin-top: 10px;
+  }
+
+  .tagline {
+    font-size: 1.5rem;
+  }
+
+  .explanation {
+    font-size: 1rem;
+  }
+
+  .feature-list {
+    flex-direction: column;
+  }
+
+  .feature {
+    margin: 10px 0;
+  }
+
+  .container {
+    height: auto;
+  }
+
+  .main-content {
+    width: 100%;
+    height: auto;
+  }
 
   /** 
   * Fix so that the logout button isn't covered by the bottom toolbars
@@ -565,10 +595,6 @@ footer {
     overflow-wrap: break-word;
   }
 
-  .trophies {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .practice-form {
     width: 100%;
   }
@@ -582,27 +608,17 @@ footer {
     flex-direction: column;
   }
 
-  .practice-type {
-    flex-direction: column;
-  }
-
-  #type-range {
-    margin: 0.5rem 0 1rem 0;
-  }
-
-  #green-label {
-    margin: 0;
-  }
-
-  #type-green {
-    margin: 0.5rem 0 0 0;
-  }
-
   #add-practice {
     width: 100%;
   }
 
   .practice-sessions {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .trophies {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
