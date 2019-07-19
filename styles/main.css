@@ -376,6 +376,7 @@ footer {
 .time-wrap {
   display: flex;
   flex-direction: column;
+  min-width: 200px;
 }
 
 #time-start,
@@ -459,6 +460,18 @@ footer {
 }
 
 @media screen and (max-width: 700px) {
+  #landing-header {
+    flex-direction: column;
+    justify-content: space-around;
+    height: auto;
+  }
+
+  #get-started {
+    display: none;
+    width: 70%;
+    margin-top: 10px;
+  }
+
   .mobile-wrap {
     width: 100%;
   }
@@ -467,6 +480,14 @@ footer {
     display: block;
     position: absolute;
     left: 1rem;
+  }
+
+  .tagline {
+    font-size: 3rem;
+  }
+
+  .explanation {
+    font-size: 1.5rem;
   }
 
   @keyframes slidein {
@@ -506,12 +527,12 @@ footer {
 }
 
 @media screen and (max-width: 535px) {
-  .practice-type {
-    flex-direction: column;
+  .practice-form {
+    width: 100%;
   }
 
-  .time-wrap {
-    width: 45%;
+  .practice-type {
+    flex-direction: column;
   }
 
   #type-range {
@@ -532,24 +553,12 @@ footer {
     width: 100%;
   }
 
-  #landing-header {
-    flex-direction: column;
-    justify-content: space-around;
-    height: auto;
-  }
-
-  #get-started {
-    display: none;
-    width: 70%;
-    margin-top: 10px;
-  }
-
   .tagline {
     font-size: 1.5rem;
   }
 
   .explanation {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 
   .feature-list {
@@ -601,10 +610,6 @@ footer {
     overflow-wrap: break-word;
   }
 
-  .practice-form {
-    width: 100%;
-  }
-
   .practice-form input[type="checkbox"] {
     transform: scale(1.5);
     margin: 0.5rem;
@@ -612,6 +617,10 @@ footer {
 
   .practice-time {
     flex-direction: column;
+  }
+
+  .time-wrap {
+    width: 50%;
   }
 
   #add-practice {
