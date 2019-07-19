@@ -5,6 +5,7 @@ const app = (() => {
 
   let scorecards = storageMod.getScorecardsFromStorage();
   let trophies = storageMod.getTrophiesFromStorage();
+  let practices = storageMod.getPracticesFromStorage();
 
   let activeMenu = document.querySelector(".scorecards");
   let activeMenuLink = document.getElementById("scorecards-link");
@@ -24,10 +25,10 @@ const app = (() => {
     if (scorecardMod.scorecard.isValid) {
       storageMod.addScorecardToStorage(scorecardMod.scorecard);
       scorecards = storageMod.getScorecardsFromStorage();
-      showAlert("#add-scorecard", "alert-success", "Scorecard Added!");
       updateScorecardsUI();
       updateTrophies();
       scorecardMod.clearScorecard();
+      showAlert("#add-scorecard", "alert-success", "Scorecard Added!");
     } else {
       showAlert(
         "#add-scorecard",
@@ -59,7 +60,7 @@ const app = (() => {
    * Updates the trophies in the application and writes them to storage.
    */
   const updateTrophies = () => {
-    // Update rounds posted trophy
+    // Update scorecards posted trophy
     trophies.scorecardsPosted = scorecards.length;
 
     // Update the lowest 9 trophy
@@ -93,6 +94,9 @@ const app = (() => {
           : Math.min(trophies.lowest18, scorecardMod.scorecard.total);
     }
 
+    // Update practices posted trophy
+    trophies.practicesPosted = practices.length;
+
     // Store the new trophy values back in storage
     storageMod.addTrophiesToStorage(trophies);
   };
@@ -111,12 +115,21 @@ const app = (() => {
     }
   };
 
+  /**
+   *
+   * @param {Event} e
+   */
   const addPractice = e => {
     e.preventDefault();
     const practiceSession = practiceMod.getPractice();
 
     if (practiceSession !== null) {
-      updatePracticeUI();
+      updatePracticesUI();
+      storageMod.addPracticeToStorage(practiceSession);
+      practices = storageMod.getPracticesFromStorage();
+      updatePracticesUI();
+      updateTrophies();
+      practiceMod.clearPracticeForm();
       showAlert("#add-practice", "alert-success", "Practice session added!");
     } else {
       showAlert(
@@ -128,16 +141,21 @@ const app = (() => {
   };
 
   /**
-   * Clears the practice form and adds a new practice session to the list in
-   * the UI.
+   * Updates the list of practice sessions in the UI.
    */
-  const updatePracticeUI = () => {
-    practicesUI.innerHTML += `
-      <div class="practice-session">
-        ${JSON.stringify(practiceMod.getPractice())}
-      </div>
-      `;
-    practiceMod.clearPracticeForm();
+  const updatePracticesUI = () => {
+    practicesUI.innerHTML = "";
+    if (practices.length !== 0) {
+      practices.forEach(practiceSession => {
+        practicesUI.innerHTML += `
+        <div class="practice-session">
+          ${JSON.stringify(practiceSession)}
+        </div>
+        `;
+      });
+    } else {
+      practicesUI.innerHTML += "Practice makes perfect!";
+    }
   };
 
   /**
@@ -213,6 +231,7 @@ const app = (() => {
 
   // Add event listeners
   document.addEventListener("DOMContentLoaded", updateScorecardsUI);
+  document.addEventListener("DOMContentLoaded", updatePracticesUI);
   document
     .getElementById("add-scorecard")
     .addEventListener("click", addScorecard);

@@ -48,7 +48,8 @@ const storage = (() => {
       return {
         scorecardsPosted: 0,
         lowest9: 0,
-        lowest18: 0
+        lowest18: 0,
+        practicesPosted: 0
       };
     }
   };
@@ -69,11 +70,46 @@ const storage = (() => {
     localStorage.removeItem("trophies");
   };
 
+  /**
+   * Get practice sessions from local storage.
+   *
+   * @return An array of practice objects or an empty array if there are no
+   *         practice sessions.
+   */
+  const getPracticesFromStorage = () => {
+    const practices = JSON.parse(localStorage.getItem("practices"));
+
+    if (practices) {
+      return practices;
+    } else {
+      return [];
+    }
+  };
+
+  /**
+   * Add a new practice session to local storage.
+   */
+  const addPracticeToStorage = practice => {
+    const practices = getPracticesFromStorage();
+
+    practices.push(practice);
+    localStorage.setItem("practices", JSON.stringify(practices));
+  };
+
+  /**
+   * Clear practice sessions from local storage.
+   */
+  const clearPracticesFromStorage = () => {
+    localStorage.removeItem("practices");
+  };
+
   return {
     getScorecardsFromStorage,
     addScorecardToStorage,
     clearScorecardsFromStorage,
     getTrophiesFromStorage,
-    addTrophiesToStorage
+    addTrophiesToStorage,
+    getPracticesFromStorage,
+    addPracticeToStorage
   };
 })();
