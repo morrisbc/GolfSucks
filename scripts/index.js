@@ -116,15 +116,17 @@ const app = (() => {
   };
 
   /**
+   * Adds a new practice session to the application. Adds the session to local
+   * storage, updates the practices and trophy UI's, and clears the practice
+   * form fields.
    *
-   * @param {Event} e
+   * @param {Event} e Event used to prevent default behavior of submit.
    */
   const addPractice = e => {
     e.preventDefault();
     const practiceSession = practiceMod.getPractice();
 
     if (practiceSession !== null) {
-      updatePracticesUI();
       storageMod.addPracticeToStorage(practiceSession);
       practices = storageMod.getPracticesFromStorage();
       updatePracticesUI();
