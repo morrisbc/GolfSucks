@@ -39,5 +39,5 @@ Back End
 * [Font Awesome](https://fontawesome.com/)
 * [Google Fonts](https://fonts.google.com/)
 
-## Deployment :warning:
+## :warning: Deployment (pardon any dust)
 [Golf Sucks](https://morrisbc.github.io/GolfSucks/)
