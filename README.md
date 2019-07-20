@@ -1,16 +1,43 @@
 # Golf Sucks
+An application to help golfers keep track of their scorecards after a round of golf.
+Affectionately named after the phrase nearly every golfer has uttered or at least thought:
+"Golf sucks." Golfers can keep track of their practice sessions including what they worked on,
+start and end time of the session, and a few notes about how it all went. Finally, golfers
+can get a overview of how many rounds they've posted, lowest nine and eighteen scores, and how
+many practice sessions they've logged.
 
-## Uh...
-Bold statement? Maybe. But anyone who's played the game has definitely been humbled and come to the same conclusion
-as me, "Wow, I suck at this." Don't worry my friend, there's hope!
+## Motivation
+Inspired by apps like the late Nike Golf 360 and [The Grint](https://www.thegrint.com/) I've always
+enjoyed using an application to track my game while on the course. Naturally, I thought it'd be a 
+fun and challenging project to create a Progressive Web Application that golfers can use while on
+the course but also at home on a desktop or laptop post round.
 
-## Ok I'm interested what is it?
-While I can't tweak your swing (trust me, you don't want me to) I can help you track your statistics off the tee 
-and around the green. Inspired by Nike Golf 360 and more recently [TheGrint](https://www.thegrint.com/), in an effort
-to improve my web dev skills I'm slowly putting this project together while maybe shaving some strokes off my golf game.
+## Screenshots
+![Landing Page](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-landing.PNG?token=AHSEPLHWYJW6KZYLWSF6BZC5HOR4K "Landing Page")
+![Dashboard Scorecards](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-scorecards.PNG?token=AHSEPLB6AJG2AINLO5YPUOK5HOQJ2 "Dashboard Scorecards")
+![Dashboard Trophies](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-trophies.PNG?token=AHSEPLDFPHJHOLF3RVQO6OC5HOQNC "Dashboard Trophies")
+![Dashboard Practice](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-practice.PNG?token=AHSEPLFDLO72LVZENOAIKP25HOQPW "Dashboard Practice")
 
-## So how's it going?
-Thanks for asking! Currently it's very minimal with just a landing page and the beginnings of both a log in page
-and a dashboard. My plans are to carve out the front end first and both implement and learn backend technologies
-afterwards. While I don't know if I'll actually ever launch the application I've definitely had fun so far. Thanks
-for checking it out!
+## Features
+* Add new scorecards with nine or eighteen hole scores to a running list of previously added
+  scorecards
+* Add new practice sessions containing a start and end time, information on what part of the
+  game was worked on, and a few notes to a running list of previously logged practice sessions
+* Display a grid of trophies displaying information such as lowest nine and eighteen hole scores,
+  number of scorecards posted, and number of practice sessions logged
+
+## Tech Used
+Front End
+* HTML5
+* CSS3
+* :icecream: JavaScript
+
+Back End
+* Local Storage
+
+## Other Resources Used
+* [Font Awesome](https://fontawesome.com/)
+* [Google Fonts](https://fonts.google.com/)
+
+## Deployment :warning:
+[Golf Sucks](https://morrisbc.github.io/GolfSucks/)
