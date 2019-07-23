@@ -175,6 +175,10 @@ const app = (() => {
       const newAlert = document.createElement("div");
       newAlert.className = `alert ${modifier}`;
 
+      const infoIcon = document.createElement("i");
+      infoIcon.className = "fas fa-info-circle";
+      newAlert.appendChild(infoIcon);
+
       const alertText = document.createTextNode(message);
       newAlert.appendChild(alertText);
 
