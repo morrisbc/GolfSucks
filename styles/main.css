@@ -307,6 +307,7 @@ footer {
   flex-direction: column;
   margin: 1rem 2rem;
   text-align: center;
+  max-width: 1000px;
 }
 
 .old-scorecard {
@@ -430,6 +431,8 @@ footer {
 .practice-sessions {
   margin: 0 2rem 1rem;
   text-align: center;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .practice-session {
