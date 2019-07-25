@@ -97,6 +97,18 @@ const storage = (() => {
   };
 
   /**
+   * Removes a specified practice session from local storage.
+   *
+   * @param {Number} id The id of the practice to remove
+   */
+  const removePracticeFromStorage = id => {
+    let practices = getPracticesFromStorage();
+
+    practices = practices.filter(practice => practice.id !== id);
+    localStorage.setItem("practices", JSON.stringify(practices));
+  };
+
+  /**
    * Clear practice sessions from local storage.
    */
   const clearPracticesFromStorage = () => {
@@ -110,6 +122,7 @@ const storage = (() => {
     getTrophiesFromStorage,
     addTrophiesToStorage,
     getPracticesFromStorage,
-    addPracticeToStorage
+    addPracticeToStorage,
+    removePracticeFromStorage
   };
 })();

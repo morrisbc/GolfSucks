@@ -79,6 +79,16 @@
   color: var(--primary-color);
 }
 
+.edit-item {
+  color: rgb(245, 227, 63);
+  margin-right: 0.5rem;
+}
+
+.delete-item {
+  color: rgb(255, 0, 0);
+  margin-left: 0.5rem;
+}
+
 header {
   position: fixed;
   width: 100%;
@@ -436,11 +446,25 @@ footer {
 }
 
 .practice-session {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1rem;
   margin: 1rem 0;
   border: 2px solid var(--primary-color);
   border-radius: 15px;
-  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+.practice-options {
+  margin-top: 1rem;
+}
+
+.practice-options button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
 }
 
 /*

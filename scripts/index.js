@@ -7,6 +7,13 @@ const app = (() => {
   let trophies = storageMod.getTrophiesFromStorage();
   let practices = storageMod.getPracticesFromStorage();
 
+  let maxPracticeId = -1;
+  practices.forEach(practice => {
+    if (practice.id > maxPracticeId) {
+      maxPracticeId = practice.id;
+    }
+  });
+
   let activeMenu = document.querySelector(".scorecards");
   let activeMenuLink = document.getElementById("scorecards-link");
   const scorecardsUI = document.querySelector(".old-scorecards");
@@ -127,6 +134,7 @@ const app = (() => {
     const practiceSession = practiceMod.getPractice();
 
     if (practiceSession !== null) {
+      practiceSession.id = ++maxPracticeId;
       storageMod.addPracticeToStorage(practiceSession);
       practices = storageMod.getPracticesFromStorage();
       updatePracticesUI();
@@ -149,14 +157,55 @@ const app = (() => {
     practicesUI.innerHTML = "";
     if (practices.length !== 0) {
       practices.forEach(practiceSession => {
-        practicesUI.innerHTML += `
-        <div class="practice-session">
-          ${JSON.stringify(practiceSession)}
-        </div>
+        let newPractice = document.createElement("div");
+        newPractice.className = "practice-session";
+        newPractice.id = `practice-${practiceSession.id}`;
+        newPractice.appendChild(
+          document.createTextNode(JSON.stringify(practiceSession))
+        );
+
+        let options = document.createElement("div");
+        options.className = "practice-options";
+        options.innerHTML = `
+          <button class="edit-item"><i class="fas fa-pencil-alt"></i></button>
+          <button class="delete-item"><i class="fas fa-times"></i></button>
         `;
+        newPractice.appendChild(options);
+
+        practicesUI.prepend(newPractice);
+
+        // document
+        //   .querySelector(".edit-practice")
+        //   .addEventListener("click", () => {
+        //     console.log("Edit");
+        //   });
+        document
+          .querySelector(".delete-item")
+          .addEventListener("click", deletePracticeSession);
       });
     } else {
       practicesUI.innerHTML += "Practice makes perfect!";
+    }
+  };
+
+  const deletePracticeSession = e => {
+    let practiceSessionElem;
+
+    if (e.target.className === "delete-item") {
+      practiceSessionElem = e.target.parentElement.parentElement;
+    } else {
+      practiceSessionElem = e.target.parentElement.parentElement.parentElement;
+    }
+
+    const practiceId = practiceSessionElem.id.slice(
+      practiceSessionElem.id.indexOf("-") + 1
+    );
+    if (confirm("Delete Practice Session?")) {
+      storageMod.removePracticeFromStorage(parseInt(practiceId));
+      practices = storageMod.getPracticesFromStorage();
+      updatePracticesUI();
+      updateTrophies();
+      showAlert("#add-practice", "alert-success", "Practice session deleted!");
     }
   };
 
