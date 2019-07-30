@@ -1,26 +1,29 @@
-const utilities = (() => {
-  const mobileMenu = document.querySelector(".mobile-menu");
-  const closeForm = document.getElementById("close-form");
-  const userForms = document.querySelector(".user-forms");
-  const getStarted = document.getElementById("get-started");
-  const signUpSubmit = document.getElementById("signup-btn");
-  const logInSubmit = document.getElementById("login-btn");
+/**
+ * Displays an alert before the specified page element.
+ *
+ * @param {String} elemSelector The selector of the UI element to insert the
+ *                              alert after
+ * @param {String} modifier The type of the alert affecting styling
+ * @param {String} message The content of the alert
+ */
+const showAlert = (elemSelector, modifier, message) => {
+  const elemUI = document.querySelector(`${elemSelector}`);
 
-  const showGetStarted = () => {
-    const getStarted = document.getElementById("get-started");
+  if (document.querySelector(`.alert.${modifier}`) === null) {
+    const newAlert = document.createElement("div");
+    newAlert.className = `alert ${modifier}`;
 
-    getStarted.style.display =
-      getStarted.style.display === ""
-        ? (getStarted.style.display = "block")
-        : (getStarted.style.display = "");
-  };
+    const infoIcon = document.createElement("i");
+    infoIcon.className = "fas fa-info-circle";
+    newAlert.appendChild(infoIcon);
 
-  mobileMenu.addEventListener("click", showGetStarted);
-  getStarted.addEventListener("click", () => {
-    userForms.style.display = "flex";
-    showGetStarted();
-  });
-  closeForm.addEventListener("click", () => {
-    userForms.style.display = "none";
-  });
-})();
+    const alertText = document.createTextNode(message);
+    newAlert.appendChild(alertText);
+
+    elemUI.parentElement.insertBefore(newAlert, elemUI);
+
+    setTimeout(() => {
+      elemUI.parentElement.removeChild(newAlert);
+    }, 2500);
+  }
+};
