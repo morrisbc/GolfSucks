@@ -28,6 +28,18 @@ const storage = (() => {
   };
 
   /**
+   * Removes a specified scorecard from local storage.
+   *
+   * @param {Number} id The id of the scorecard to remove
+   */
+  const removeScorecardFromStorage = id => {
+    let scorecards = getScorecardsFromStorage();
+
+    scorecards = scorecards.filter(scorecard => scorecard.id !== id);
+    localStorage.setItem("scorecards", JSON.stringify(scorecards));
+  };
+
+  /**
    * Removes all scorecards from local storage.
    */
   const clearScorecardsFromStorage = () => {
@@ -97,6 +109,21 @@ const storage = (() => {
   };
 
   /**
+   *
+   * @param {Number} id The id of the practice to edit
+   */
+  const editPracticeInStorage = id => {
+    let practices = getPracticesFromStorage();
+    let practiceToUpdate;
+
+    practices.forEach(practice => {
+      if (practice.id === id) {
+        practiceToUpdate = practice;
+      }
+    });
+  };
+
+  /**
    * Removes a specified practice session from local storage.
    *
    * @param {Number} id The id of the practice to remove
@@ -118,6 +145,7 @@ const storage = (() => {
   return {
     getScorecardsFromStorage,
     addScorecardToStorage,
+    removeScorecardFromStorage,
     clearScorecardsFromStorage,
     getTrophiesFromStorage,
     addTrophiesToStorage,

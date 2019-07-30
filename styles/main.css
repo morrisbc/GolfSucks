@@ -50,6 +50,8 @@
   text-decoration: none;
   text-align: center;
   color: white;
+  cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .submit-btn {
@@ -141,7 +143,8 @@ footer {
 
 .logo {
   color: white;
-  font-family: "Fugaz One", cursive;
+  font-family: "Fugaz One", Impact, Haettenschweiler, "Arial Narrow Bold",
+    sans-serif;
   white-space: nowrap;
   text-transform: uppercase;
   text-align: center;
@@ -165,7 +168,8 @@ footer {
 }
 
 .tagline {
-  font-family: "Fugaz One", cursive;
+  font-family: "Fugaz One", Impact, Haettenschweiler, "Arial Narrow Bold",
+    sans-serif;
   font-size: 4rem;
   text-align: center;
   text-decoration-line: underline;
@@ -174,6 +178,93 @@ footer {
   background-color: rgba(128, 128, 128, 0.75);
   border-radius: 100px;
   padding: 5px 25px;
+}
+
+.user-forms {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  padding: 2rem;
+  background-color: var(--primary-color);
+  border: 3px solid var(--accent-color);
+  box-sizing: border-box;
+  min-width: 320px;
+  font-family: "Prompt", Arial, Helvetica, sans-serif;
+  color: white;
+  display: none;
+}
+
+.user-forms input {
+  margin: 1rem 0;
+}
+
+.user-forms input[type="email"],
+.user-forms input[type="password"] {
+  background: none;
+  border: none;
+  border-bottom: 2px solid white;
+  border-radius: 0;
+  padding: 5px 5px 3px;
+  color: white;
+  font-size: 1rem;
+}
+
+#close-form {
+  color: white;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.user-toggle {
+  display: flex;
+}
+
+.signup-toggle,
+.login-toggle {
+  width: 50%;
+  padding: 10px;
+  background: none;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  font-family: "Prompt", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+.active-toggle {
+  border-bottom: 2px solid white;
+}
+
+.form-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+#signup-form,
+#login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+#login-form {
+  display: none;
+}
+
+#signup-btn,
+#login-btn {
+  background-color: var(--primary-color);
+  font-size: 1rem;
 }
 
 .explanation {
@@ -408,6 +499,12 @@ footer {
   margin-bottom: 1rem;
 }
 
+.required {
+  color: red;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
 #type-range {
   margin: 0 1rem;
 }
@@ -433,9 +530,13 @@ footer {
   font-size: 1rem;
 }
 
-#add-practice {
+.practice-btn {
   margin: 1rem 0;
   width: 100%;
+}
+
+#edit-practice {
+  display: none;
 }
 
 .practice-sessions {
@@ -456,11 +557,11 @@ footer {
   word-break: break-all;
 }
 
-.practice-options {
+.item-options {
   margin-top: 1rem;
 }
 
-.practice-options button {
+.item-options button {
   background: none;
   border: none;
   font-size: 1.25rem;
@@ -655,7 +756,7 @@ footer {
     width: 50%;
   }
 
-  #add-practice {
+  .practice-btn {
     width: 100%;
   }
 

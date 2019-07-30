@@ -25,7 +25,7 @@
         <a id="scorecards-link" class="sidebar-link active-menu">Scorecards</a>
         <a id="trophies-link" class="sidebar-link">Trophies</a>
         <a id="practice-link" class="sidebar-link">Practice</a>
-        <a class="logout sidebar-link" href="index.html">Log Out</a>
+        <a class="logout sidebar-link">Log Out</a>
       </nav>
       <div class="main-content">
         <div class="content-item scorecards">
@@ -271,7 +271,9 @@
                 <input type="datetime-local" name="" id="time-end" />
               </div>
             </div>
-            <h3>What did you work on?</h3>
+            <h3>
+              What did you work on?<span class="required"> (One required)</span>
+            </h3>
             <div class="practice-type">
               <label for="type-range">Full Swing:</label>
               <div id="type-range">
@@ -333,9 +335,15 @@
             </div>
             <input
               id="add-practice"
-              class="submit-btn btn"
+              class="submit-btn practice-btn btn"
               type="submit"
               value="Add Practice"
+            />
+            <input
+              id="edit-practice"
+              class="submit-btn practice-btn btn"
+              type="submit"
+              value="Edit Practice"
             />
           </form>
           <div class="practice-sessions"></div>
@@ -343,7 +351,12 @@
       </div>
     </div>
 
-    <script src="./scripts/utilities.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+
+    <script src="./scripts/firebase-config.js"></script>
+    <script src="./scripts/auth.js"></script>
     <script src="./scripts/storage.js"></script>
     <script src="./scripts/scorecard.js"></script>
     <script src="./scripts/practice.js"></script>

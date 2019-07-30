@@ -7,10 +7,21 @@ const app = (() => {
   let trophies = storageMod.getTrophiesFromStorage();
   let practices = storageMod.getPracticesFromStorage();
 
+  // Max id for practices to avoid duplicate ids and multiple delete
+  // and edit operations
   let maxPracticeId = -1;
   practices.forEach(practice => {
     if (practice.id > maxPracticeId) {
       maxPracticeId = practice.id;
+    }
+  });
+
+  // Max id for scorecards to avoid duplicate ids and multiple delete
+  // and edit operations
+  let maxScorecardId = -1;
+  scorecards.forEach(scorecard => {
+    if (scorecard.id > maxScorecardId) {
+      maxScorecardId = scorecard.id;
     }
   });
 
@@ -30,6 +41,7 @@ const app = (() => {
     e.preventDefault();
 
     if (scorecardMod.scorecard.isValid) {
+      scorecardMod.scorecard.id = ++maxScorecardId;
       storageMod.addScorecardToStorage(scorecardMod.scorecard);
       scorecards = storageMod.getScorecardsFromStorage();
       updateScorecardsUI();
@@ -52,14 +64,71 @@ const app = (() => {
     scorecardsUI.innerHTML = "";
     if (scorecards.length !== 0) {
       scorecards.forEach(scorecard => {
-        scorecardsUI.innerHTML += `
-        <div class="old-scorecard">
-          ${JSON.stringify(scorecard)}
-        </div>
-        `;
+        // Create the new scorecard element
+        let newScorecard = document.createElement("div");
+        newScorecard.className = "old-scorecard";
+        newScorecard.id = `scorecard-${scorecard.id}`;
+        newScorecard.appendChild(
+          document.createTextNode(JSON.stringify(scorecard))
+        );
+
+        // Create the div for the edit and delete buttons
+        let options = document.createElement("div");
+        options.className = "item-options";
+
+        // Create the edit button and add it to the options div
+        let editButton = document.createElement("button");
+        editButton.className = "edit-item";
+        editButton.innerHTML = "<i class='fas fa-pencil-alt'></i>";
+        options.appendChild(editButton);
+
+        // Create the delete button and add it to the options div
+        let deleteButton = document.createElement("button");
+        deleteButton.className = "delete-item";
+        deleteButton.innerHTML = "<i class='fas fa-times'></i>";
+        options.appendChild(deleteButton);
+
+        // Add the options div to the scorecard element
+        newScorecard.appendChild(options);
+
+        // Add the new scorecard to the UI
+        scorecardsUI.prepend(newScorecard);
+
+        // Add the event listeners for the options buttons now that they
+        // are in the DOM
+        editButton.addEventListener("click", editScorecard);
+        deleteButton.addEventListener("click", deleteScorecard);
       });
     } else {
       scorecardsUI.innerText = "Time to hit the course!";
+    }
+  };
+
+  const editScorecard = () => {};
+
+  /**
+   * Removes a scorecard from the application.
+   *
+   * @param {Event} e Event used to target the practice session to delete
+   */
+  const deleteScorecard = e => {
+    let scorecardElem;
+
+    if (e.target.className === "delete-item") {
+      scorecardElem = e.target.parentElement.parentElement;
+    } else {
+      scorecardElem = e.target.parentElement.parentElement.parentElement;
+    }
+
+    const scorecardId = scorecardElem.id.slice(
+      scorecardElem.id.indexOf("-") + 1
+    );
+    if (confirm("Delete Scorecard?")) {
+      storageMod.removeScorecardFromStorage(parseInt(scorecardId));
+      scorecards = storageMod.getScorecardsFromStorage();
+      updateScorecardsUI();
+      updateTrophies();
+      showAlert("#add-scorecard", "alert-success", "Scorecard deleted!");
     }
   };
 
@@ -157,6 +226,7 @@ const app = (() => {
     practicesUI.innerHTML = "";
     if (practices.length !== 0) {
       practices.forEach(practiceSession => {
+        // Create the new practice session element
         let newPractice = document.createElement("div");
         newPractice.className = "practice-session";
         newPractice.id = `practice-${practiceSession.id}`;
@@ -164,30 +234,84 @@ const app = (() => {
           document.createTextNode(JSON.stringify(practiceSession))
         );
 
+        // Create the div for the edit and delete buttons
         let options = document.createElement("div");
-        options.className = "practice-options";
-        options.innerHTML = `
-          <button class="edit-item"><i class="fas fa-pencil-alt"></i></button>
-          <button class="delete-item"><i class="fas fa-times"></i></button>
-        `;
+        options.className = "item-options";
+
+        // Create the edit button and add it to the options div
+        let editButton = document.createElement("button");
+        editButton.className = "edit-item";
+        editButton.innerHTML = "<i class='fas fa-pencil-alt'></i>";
+        options.appendChild(editButton);
+
+        // Create the delete button and add it to the options div
+        let deleteButton = document.createElement("button");
+        deleteButton.className = "delete-item";
+        deleteButton.innerHTML = "<i class='fas fa-times'></i>";
+        options.appendChild(deleteButton);
+
+        // Add the options div to the practice session element
         newPractice.appendChild(options);
 
+        // Add the new practice session to the UI
         practicesUI.prepend(newPractice);
 
-        // document
-        //   .querySelector(".edit-practice")
-        //   .addEventListener("click", () => {
-        //     console.log("Edit");
-        //   });
-        document
-          .querySelector(".delete-item")
-          .addEventListener("click", deletePracticeSession);
+        // Add the event listeners for the options buttons now that they
+        // are in the DOM
+        editButton.addEventListener("click", editPracticeSession);
+        deleteButton.addEventListener("click", deletePracticeSession);
       });
     } else {
       practicesUI.innerHTML += "Practice makes perfect!";
     }
   };
 
+  /**
+   *
+   * @param {Event} e Event used to target the practice session to edit
+   */
+  const editPracticeSession = e => {
+    e.preventDefault();
+
+    let practiceSessionElem;
+
+    if (e.target.className === "edit-item") {
+      practiceSessionElem = e.target.parentElement.parentElement;
+    } else {
+      practiceSessionElem = e.target.parentElement.parentElement.parentElement;
+    }
+
+    const practiceId = parseInt(
+      practiceSessionElem.id.slice(practiceSessionElem.id.indexOf("-") + 1)
+    );
+
+    let practiceToUpdate;
+    for (let practice = 0; practice < practices.length; practice++) {
+      if (practices[practice].id === practiceId) {
+        practiceToUpdate = practices[practice];
+        break;
+      }
+    }
+
+    practiceMod.populatePracticeSession(practiceToUpdate);
+    practiceMod.showEditButton();
+  };
+
+  /**
+   *
+   *
+   * @param {Event} e Event used to avoid form submission default behavior
+   */
+  const confirmPracticeEdit = e => {
+    e.preventDefault();
+  };
+
+  /**
+   * Gets the practice session that was clicked for delete and removes
+   * it from the application.
+   *
+   * @param {Event} e Event used to target the practice session to delete
+   */
   const deletePracticeSession = e => {
     let practiceSessionElem;
 
@@ -231,7 +355,6 @@ const app = (() => {
       const alertText = document.createTextNode(message);
       newAlert.appendChild(alertText);
 
-      // elemUI.append(newAlert);
       elemUI.parentElement.insertBefore(newAlert, elemUI);
 
       setTimeout(() => {
@@ -291,12 +414,22 @@ const app = (() => {
     .getElementById("add-scorecard")
     .addEventListener("click", addScorecard);
   document.querySelectorAll(".sidebar-link").forEach(link => {
-    link.addEventListener("click", changeMenu);
+    if (!link.classList.contains("logout")) {
+      link.addEventListener("click", changeMenu);
+    }
   });
   document
     .getElementById("add-practice")
     .addEventListener("click", addPractice);
   document
+    .getElementById("edit-practice")
+    .addEventListener("click", confirmPracticeEdit);
+  document
     .querySelector(".mobile-menu")
     .addEventListener("click", toggleSidebar);
+  document.querySelector(".logout").addEventListener("click", () => {
+    console.log("Signed Out");
+    auth.signOut();
+    window.location.replace("./index.html");
+  });
 })();

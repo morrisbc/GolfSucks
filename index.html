@@ -17,12 +17,35 @@
     <header id="landing-header">
       <div class="mobile-wrap">
         <a class="mobile-menu"><i class="fas fa-bars"></i></a>
-        <a class="logo" href="index.html"><h1>Golf Sucks</h1></a>
+        <h1 class="logo">Golf Sucks</h1>
       </div>
-      <a id="get-started" class="btn" href="dashboard.html">Get Started</a>
+      <a id="get-started" class="btn">Get Started</a>
     </header>
     <section class="landing">
       <h2 class="tagline">You Suck. So Do We.</h2>
+      <div class="user-forms">
+        <button id="close-form"><i class="fas fa-times"></i></button>
+        <div class="user-toggle">
+          <button class="signup-toggle active-toggle">Sign Up</button>
+          <button class="login-toggle">Log In</button>
+        </div>
+        <div class="form-wrap">
+          <form id="signup-form">
+            <label for="signup-email">Email:</label>
+            <input type="email" name="" id="signup-email" />
+            <label for="signup-password">Password:</label>
+            <input type="password" name="" id="signup-password" />
+            <input id="signup-btn" class="btn" type="submit" value="Sign Up" />
+          </form>
+          <form id="login-form">
+            <label for="login-email">Email:</label>
+            <input type="email" name="" id="login-email" />
+            <label for="login-password">Password:</label>
+            <input type="password" name="" id="login-password" />
+            <input id="login-btn" class="btn" type="submit" value="Log In" />
+          </form>
+        </div>
+      </div>
     </section>
     <section class="explanation">
       <h2>Let's fix that, together.</h2>
@@ -33,6 +56,13 @@
       </ul>
     </section>
     <footer>Golf Sucks &copy; 2019</footer>
-    <script src="scripts/utilities.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+
+    <script src="./scripts/firebase-config.js"></script>
+    <script src="./scripts/auth.js"></script>
+    <script src="./scripts/utilities.js"></script>
   </body>
 </html>

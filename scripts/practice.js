@@ -5,6 +5,8 @@ const practice = (() => {
   const fullSwing = document.querySelectorAll("#type-range div input");
   const shortGame = document.querySelectorAll("#type-green div input");
   const notes = document.getElementById("practice-notes");
+  const addPractice = document.getElementById("add-practice");
+  const editPractice = document.getElementById("edit-practice");
 
   // Private practice session object member
   const practiceSession = {
@@ -23,6 +25,29 @@ const practice = (() => {
       putting: false
     },
     notes: ""
+  };
+
+  /**
+   * Populates the practice form with the information from a given practice
+   * session.
+   *
+   * @param {Object} practiceSession The practice session used to populate the
+   *                                 form
+   */
+  const populatePracticeSession = practice => {
+    console.log(practice);
+
+    fullSwing.forEach(formField => {
+      formField.checked = practice.fullSwing[formField.name];
+      formField.value = practice.fullSwing[formField.name];
+    });
+
+    shortGame.forEach(formField => {
+      formField.checked = practice.shortGame[formField.name];
+      formField.value = practice.shortGame[formField.name];
+    });
+
+    notes.value = practice.notes;
   };
 
   /**
@@ -112,10 +137,30 @@ const practice = (() => {
       return null;
     }
   };
+  /**
+   * Displays the add practice button and hides the edit practice button in
+   * the practice form.
+   */
+  const showAddButton = () => {
+    addPractice.style.display = "flex";
+    editPractice.style.display = "none";
+  };
+
+  /**
+   * Displays the edit practice button and hides the add practice button in
+   * the practice form.
+   */
+  const showEditButton = () => {
+    editPractice.style.display = "flex";
+    addPractice.style.display = "none";
+  };
 
   return {
     getPractice,
-    clearPracticeForm
+    populatePracticeSession,
+    clearPracticeForm,
+    showEditButton,
+    showAddButton
   };
 
   // document.getElementById("add-practice").addEventListener("click", () => {
