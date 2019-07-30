@@ -302,7 +302,7 @@ footer {
 
 .container {
   padding-top: 11vh;
-  height: 89vh;
+  min-height: 89vh;
   display: flex;
 }
 
