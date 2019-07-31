@@ -8,29 +8,29 @@ import {
 } from "./practice.js";
 import { clearScorecard, getScorecard } from "./scorecard.js";
 import { showAlert } from "./utilities.js";
-const storageMod = storage;
+//const storageMod = storage;
 
-let scorecards = storageMod.getScorecardsFromStorage();
-let trophies = storageMod.getTrophiesFromStorage();
-let practices = storageMod.getPracticesFromStorage();
+// let scorecards = storageMod.getScorecardsFromStorage();
+// let trophies = storageMod.getTrophiesFromStorage();
+// let practices = storageMod.getPracticesFromStorage();
 
 // Max id for practices to avoid duplicate ids and multiple delete
 // and edit operations
-let maxPracticeId = -1;
-practices.forEach(practice => {
-  if (practice.id > maxPracticeId) {
-    maxPracticeId = practice.id;
-  }
-});
+// let maxPracticeId = -1;
+// practices.forEach(practice => {
+//   if (practice.id > maxPracticeId) {
+//     maxPracticeId = practice.id;
+//   }
+// });
 
 // Max id for scorecards to avoid duplicate ids and multiple delete
 // and edit operations
-let maxScorecardId = -1;
-scorecards.forEach(scorecard => {
-  if (scorecard.id > maxScorecardId) {
-    maxScorecardId = scorecard.id;
-  }
-});
+// let maxScorecardId = -1;
+// scorecards.forEach(scorecard => {
+//   if (scorecard.id > maxScorecardId) {
+//     maxScorecardId = scorecard.id;
+//   }
+// });
 
 let activeMenu = document.querySelector(".scorecards");
 let activeMenuLink = document.getElementById("scorecards-link");
@@ -47,14 +47,14 @@ const practicesUI = document.querySelector(".practice-sessions");
 const addScorecard = e => {
   e.preventDefault();
 
-  const scorecard = scorecardMod.getScorecard();
+  const scorecard = getScorecard();
   if (scorecard) {
     scorecard.id = ++maxScorecardId;
-    storageMod.addScorecardToStorage(scorecard);
-    scorecards = storageMod.getScorecardsFromStorage();
+    // storageMod.addScorecardToStorage(scorecard);
+    // scorecards = storageMod.getScorecardsFromStorage();
     //updateScorecardsUI();
     updateTrophies();
-    scorecardMod.clearScorecard();
+    clearScorecard();
     showAlert("#add-scorecard", "alert-success", "Scorecard Added!");
   } else {
     showAlert(
@@ -131,7 +131,7 @@ const updateTrophies = () => {
   trophies.scorecardsPosted = scorecards.length;
 
   // Update the lowest 9 trophy
-  const scorecard = scorecardMod.getScorecard();
+  const scorecard = getScorecard();
   if (scorecard.out > 0) {
     if (trophies.lowest9 === 0) {
       trophies.lowest9 = scorecard.out;
@@ -160,7 +160,7 @@ const updateTrophies = () => {
   trophies.practicesPosted = practices.length;
 
   // Store the new trophy values back in storage
-  storageMod.addTrophiesToStorage(trophies);
+  // storageMod.addTrophiesToStorage(trophies);
 };
 
 /**
@@ -196,8 +196,8 @@ const addPractice = e => {
 
   if (practiceSession !== null) {
     practiceSession.id = ++maxPracticeId;
-    storageMod.addPracticeToStorage(practiceSession);
-    practices = storageMod.getPracticesFromStorage();
+    // storageMod.addPracticeToStorage(practiceSession);
+    // practices = storageMod.getPracticesFromStorage();
     //updatePracticesUI();
     updateTrophies();
     clearPracticeForm();
