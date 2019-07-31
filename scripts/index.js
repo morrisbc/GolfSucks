@@ -167,7 +167,7 @@ const updateTrophies = () => {
  * Updates the UI for the trophies section of the application.
  */
 export const updateTrophiesUI = snapshot => {
-  let trophies;
+  let trophies = {};
 
   snapshot.forEach(doc => {
     trophies = doc.data();
@@ -195,10 +195,10 @@ const addPractice = e => {
   const practiceSession = getPractice();
 
   if (practiceSession !== null) {
-    practiceSession.id = ++maxPracticeId;
+    // practiceSession.id = ++maxPracticeId;
     // storageMod.addPracticeToStorage(practiceSession);
     // practices = storageMod.getPracticesFromStorage();
-    //updatePracticesUI();
+    // updatePracticesUI();
     updateTrophies();
     clearPracticeForm();
     showAlert("#add-practice", "alert-success", "Practice session added!");
@@ -215,10 +215,10 @@ const addPractice = e => {
  * Updates the list of practice sessions in the UI.
  */
 export const updatePracticesUI = snapshot => {
-  snapshot.forEach(doc => {
-    const practiceSession = doc.data();
+  if (snapshot.size > 0) {
+    snapshot.forEach(doc => {
+      const practiceSession = doc.data();
 
-    if (snapshot.size > 0) {
       // Create the new practice session element
       let newPractice = document.createElement("div");
       newPractice.className = "practice-session";
@@ -253,10 +253,10 @@ export const updatePracticesUI = snapshot => {
       // are in the DOM
       editButton.addEventListener("click", editPracticeSession);
       deleteButton.addEventListener("click", deletePracticeSession);
-    } else {
-      practicesUI.innerHTML += "Practice makes perfect!";
-    }
-  });
+    });
+  } else {
+    practicesUI.innerHTML += "Practice makes perfect!";
+  }
 };
 
 /**
