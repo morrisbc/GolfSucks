@@ -6,7 +6,7 @@
  * @param {String} modifier The type of the alert affecting styling
  * @param {String} message The content of the alert
  */
-const showAlert = (elemSelector, modifier, message) => {
+export const showAlert = (elemSelector, modifier, message) => {
   const elemUI = document.querySelector(`${elemSelector}`);
 
   if (document.querySelector(`.alert.${modifier}`) === null) {
