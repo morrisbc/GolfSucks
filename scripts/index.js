@@ -107,24 +107,56 @@ export const updateTrophies = (user, snapshot, collectionName) => {
         trophiesDoc = doc;
       });
 
-      if (collectionName === "scorecards") {
+      if (!trophiesDoc) {
         db.collection("trophies")
-          .doc(trophiesDoc.id)
-          .update({
-            scorecardsPosted: snapshot.size,
+          .add({
+            scorecardsPosted: 0,
+            practicesPosted: 0,
+            lowestEighteen: 0,
+            lowestNine: 0,
             user: user.uid
           })
-          .catch(err => console.log(err.message));
-      }
+          .then(doc => {
+            if (collectionName === "scorecards") {
+              db.collection("trophies")
+                .doc(doc.id)
+                .update({
+                  scorecardsPosted: snapshot.size,
+                  user: user.uid
+                })
+                .catch(err => console.log(err.message));
+            }
 
-      if (collectionName === "practiceSessions") {
-        db.collection("trophies")
-          .doc(trophiesDoc.id)
-          .update({
-            practicesPosted: snapshot.size,
-            user: user.uid
-          })
-          .catch(err => console.log(err.message));
+            if (collectionName === "practiceSessions") {
+              db.collection("trophies")
+                .doc(doc.id)
+                .update({
+                  practicesPosted: snapshot.size,
+                  user: user.uid
+                })
+                .catch(err => console.log(err.message));
+            }
+          });
+      } else {
+        if (collectionName === "scorecards") {
+          db.collection("trophies")
+            .doc(trophiesDoc.id)
+            .update({
+              scorecardsPosted: snapshot.size,
+              user: user.uid
+            })
+            .catch(err => console.log(err.message));
+        }
+
+        if (collectionName === "practiceSessions") {
+          db.collection("trophies")
+            .doc(trophiesDoc.id)
+            .update({
+              practicesPosted: snapshot.size,
+              user: user.uid
+            })
+            .catch(err => console.log(err.message));
+        }
       }
     });
 

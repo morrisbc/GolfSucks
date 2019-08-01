@@ -46,11 +46,11 @@ const scorecard = {
  */
 const updateScorecardUI = () => {
   frontNineElems.forEach((holeInput, holeNumber) => {
-    holeInput.value = scorecard.frontNine[holeNumber + 1] || "";
+    holeInput.value = scorecard.frontNine[`hole${holeNumber + 1}`] || "";
   });
 
   backNineElems.forEach((holeInput, holeNumber) => {
-    holeInput.value = scorecard.backNine[holeNumber + 10] || "";
+    holeInput.value = scorecard.backNine[`hole${holeNumber + 10}`] || "";
   });
 
   outNineElem.value = scorecard.out || "";
@@ -71,10 +71,10 @@ const calculateFrontNineScore = () => {
     // Validate hole input and add it to the front nine total
     if (!isNaN(holeScore) && holeScore > 0) {
       outScore += holeScore;
-      scorecard.frontNine[holeNumber + 1] = holeScore;
+      scorecard.frontNine[`hole${holeNumber + 1}`] = holeScore;
     } else {
       invalidHoleScore = true;
-      scorecard.frontNine[holeNumber + 1] = 0;
+      scorecard.frontNine[`hole${holeNumber + 1}`] = 0;
     }
   });
 
@@ -98,10 +98,10 @@ const calculateBackNineScore = () => {
     // Validate hole input and add it to the back nine total
     if (!isNaN(holeScore) && holeScore > 0) {
       inScore += holeScore;
-      scorecard.backNine[holeNumber + 10] = holeScore;
+      scorecard.backNine[`hole${holeNumber + 10}`] = holeScore;
     } else {
       invalidHoleScore = true;
-      scorecard.backNine[holeNumber + 10] = 0;
+      scorecard.backNine[`hole${holeNumber + 10}`] = 0;
     }
   });
 
