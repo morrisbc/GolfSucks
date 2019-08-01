@@ -1,3 +1,5 @@
+import { auth } from "./firebase-config.js";
+
 // Practice form elements
 const practiceForm = document.querySelector(".practice-form");
 const practiceStart = document.getElementById("time-start");
@@ -24,7 +26,8 @@ const practiceSession = {
     chipping: false,
     putting: false
   },
-  notes: ""
+  notes: "",
+  user: ""
 };
 
 /**
@@ -121,6 +124,7 @@ export const getPractice = () => {
       practiceSession.shortGame[clubType.name] = clubType.checked;
     });
     practiceSession.notes = notes.value;
+    practiceSession.user = auth.currentUser.uid;
 
     return practiceSession;
   } else {

@@ -1,3 +1,5 @@
+import { auth } from "./firebase-config.js";
+
 const outNineElem = document.getElementById("out");
 const inNineElem = document.getElementById("in");
 const totalElem = document.getElementById("total");
@@ -10,32 +12,33 @@ const backNineElems = document.querySelectorAll(
 
 const scorecard = {
   frontNine: {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0
+    hole1: 0,
+    hole2: 0,
+    hole3: 0,
+    hole4: 0,
+    hole5: 0,
+    hole6: 0,
+    hole7: 0,
+    hole8: 0,
+    hole9: 0
   },
   backNine: {
-    10: 0,
-    11: 0,
-    12: 0,
-    13: 0,
-    14: 0,
-    15: 0,
-    16: 0,
-    17: 0,
-    18: 0
+    hole10: 0,
+    hole11: 0,
+    hole12: 0,
+    hole13: 0,
+    hole14: 0,
+    hole15: 0,
+    hole16: 0,
+    hole17: 0,
+    hole18: 0
   },
   out: 0,
   in: 0,
   total: 0,
   location: null,
-  date: null
+  date: null,
+  user: ""
 };
 
 /**
@@ -133,6 +136,7 @@ const scorecardIsValid = () => {
  */
 export const getScorecard = () => {
   if (scorecardIsValid()) {
+    scorecard.user = auth.currentUser.uid;
     return scorecard;
   } else {
     return null;

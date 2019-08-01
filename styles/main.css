@@ -302,15 +302,17 @@ footer {
 
 .container {
   padding-top: 11vh;
+  padding-left: 150px;
   min-height: 89vh;
   display: flex;
 }
 
 .sidebar {
-  position: relative;
+  position: fixed;
+  left: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  height: 89vh;
   background-color: var(--alt-primary-color);
   text-align: center;
   box-sizing: border-box;
@@ -614,6 +616,10 @@ footer {
 }
 
 @media screen and (max-width: 700px) {
+  .container {
+    padding-left: 0;
+  }
+
   #landing-header {
     flex-direction: column;
     justify-content: space-around;

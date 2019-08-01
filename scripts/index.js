@@ -1,4 +1,4 @@
-import { auth } from "./firebase-config.js";
+import { auth, db } from "./firebase-config.js";
 import {
   getPractice,
   populatePracticeSession,
@@ -8,29 +8,6 @@ import {
 } from "./practice.js";
 import { clearScorecard, getScorecard } from "./scorecard.js";
 import { showAlert } from "./utilities.js";
-//const storageMod = storage;
-
-// let scorecards = storageMod.getScorecardsFromStorage();
-// let trophies = storageMod.getTrophiesFromStorage();
-// let practices = storageMod.getPracticesFromStorage();
-
-// Max id for practices to avoid duplicate ids and multiple delete
-// and edit operations
-// let maxPracticeId = -1;
-// practices.forEach(practice => {
-//   if (practice.id > maxPracticeId) {
-//     maxPracticeId = practice.id;
-//   }
-// });
-
-// Max id for scorecards to avoid duplicate ids and multiple delete
-// and edit operations
-// let maxScorecardId = -1;
-// scorecards.forEach(scorecard => {
-//   if (scorecard.id > maxScorecardId) {
-//     maxScorecardId = scorecard.id;
-//   }
-// });
 
 let activeMenu = document.querySelector(".scorecards");
 let activeMenuLink = document.getElementById("scorecards-link");
@@ -49,13 +26,12 @@ const addScorecard = e => {
 
   const scorecard = getScorecard();
   if (scorecard) {
-    scorecard.id = ++maxScorecardId;
-    // storageMod.addScorecardToStorage(scorecard);
-    // scorecards = storageMod.getScorecardsFromStorage();
-    //updateScorecardsUI();
-    updateTrophies();
-    clearScorecard();
-    showAlert("#add-scorecard", "alert-success", "Scorecard Added!");
+    db.collection("scorecards")
+      .add(scorecard)
+      .then(() => {
+        clearScorecard();
+        showAlert("#add-scorecard", "alert-success", "Scorecard Added!");
+      });
   } else {
     showAlert(
       "#add-scorecard",
@@ -66,7 +42,10 @@ const addScorecard = e => {
 };
 
 /**
- * Updates the scorecards UI
+ * Updates the scorecards UI.
+ *
+ * @param snapshot The collection snapshot from the firestore database
+ *                 containing the most recent scorecards
  */
 export const updateScorecardsUI = snapshot => {
   scorecardsUI.innerHTML = "";
@@ -103,68 +82,84 @@ export const updateScorecardsUI = snapshot => {
 
       // Add the new scorecard to the UI
       scorecardsUI.prepend(newScorecard);
-
-      // Add the event listeners for the options buttons now that they
-      // are in the DOM
-      editButton.addEventListener("click", editScorecard);
-      deleteButton.addEventListener("click", deleteScorecard);
     });
   } else {
     scorecardsUI.innerHTML += "Time to hit the course!";
   }
 };
 
-const editScorecard = () => {};
-
 /**
- * Removes a scorecard from the application.
+ * Updates the trophies in the application and writes them to the firestore
+ * database.
  *
- * @param {Event} e Event used to target the practice session to delete
+ * @param user The current user
+ * @param snapshot The collection snapshot used to update applicable trophies
+ * @param collectionName The name of the collection the snapshot is from
  */
-const deleteScorecard = e => {};
+export const updateTrophies = (user, snapshot, collectionName) => {
+  db.collection("trophies")
+    .where("user", "==", user.uid)
+    .get()
+    .then(trophySnapshot => {
+      let trophiesDoc;
 
-/**
- * Updates the trophies in the application and writes them to storage.
- */
-const updateTrophies = () => {
-  // Update scorecards posted trophy
-  trophies.scorecardsPosted = scorecards.length;
+      trophySnapshot.forEach(doc => {
+        trophiesDoc = doc;
+      });
 
-  // Update the lowest 9 trophy
-  const scorecard = getScorecard();
-  if (scorecard.out > 0) {
-    if (trophies.lowest9 === 0) {
-      trophies.lowest9 = scorecard.out;
-    } else {
-      trophies.lowest9 = Math.min(trophies.lowest9, scorecard.out);
-    }
-  }
+      if (collectionName === "scorecards") {
+        db.collection("trophies")
+          .doc(trophiesDoc.id)
+          .update({
+            scorecardsPosted: snapshot.size,
+            user: user.uid
+          })
+          .catch(err => console.log(err.message));
+      }
 
-  if (scorecard.in > 0) {
-    if (trophies.lowest9 === 0) {
-      trophies.lowest9 = scorecard.in;
-    } else {
-      trophies.lowest9 = Math.min(trophies.lowest9, scorecard.in);
-    }
-  }
+      if (collectionName === "practiceSessions") {
+        db.collection("trophies")
+          .doc(trophiesDoc.id)
+          .update({
+            practicesPosted: snapshot.size,
+            user: user.uid
+          })
+          .catch(err => console.log(err.message));
+      }
+    });
 
-  // Update the lowest 18 trophy
-  if (scorecard.out > 0 && scorecard.in > 0) {
-    trophies.lowest18 =
-      trophies.lowest18 === 0
-        ? scorecard.total
-        : Math.min(trophies.lowest18, scorecard.total);
-  }
+  // // Update the lowest 9 trophy
+  // const scorecard = getScorecard();
+  // if (scorecard.out > 0) {
+  //   if (trophies.lowest9 === 0) {
+  //     trophies.lowest9 = scorecard.out;
+  //   } else {
+  //     trophies.lowest9 = Math.min(trophies.lowest9, scorecard.out);
+  //   }
+  // }
 
-  // Update practices posted trophy
-  trophies.practicesPosted = practices.length;
+  // if (scorecard.in > 0) {
+  //   if (trophies.lowest9 === 0) {
+  //     trophies.lowest9 = scorecard.in;
+  //   } else {
+  //     trophies.lowest9 = Math.min(trophies.lowest9, scorecard.in);
+  //   }
+  // }
 
-  // Store the new trophy values back in storage
-  // storageMod.addTrophiesToStorage(trophies);
+  // // Update the lowest 18 trophy
+  // if (scorecard.out > 0 && scorecard.in > 0) {
+  //   trophies.lowest18 =
+  //     trophies.lowest18 === 0
+  //       ? scorecard.total
+  //       : Math.min(trophies.lowest18, scorecard.total);
+  // }
 };
 
 /**
  * Updates the UI for the trophies section of the application.
+ *
+ * @param snapshot The collection snapshot containing the most up to date
+ *                 firestore database values
  */
 export const updateTrophiesUI = snapshot => {
   let trophies = {};
@@ -194,27 +189,25 @@ const addPractice = e => {
   e.preventDefault();
   const practiceSession = getPractice();
 
-  if (practiceSession !== null) {
-    // practiceSession.id = ++maxPracticeId;
-    // storageMod.addPracticeToStorage(practiceSession);
-    // practices = storageMod.getPracticesFromStorage();
-    // updatePracticesUI();
-    updateTrophies();
-    clearPracticeForm();
-    showAlert("#add-practice", "alert-success", "Practice session added!");
-  } else {
-    showAlert(
-      "#add-practice",
-      "alert-danger",
-      "Please submit a valid practice session."
-    );
-  }
+  db.collection("practiceSessions")
+    .add(practiceSession)
+    .then(() => {
+      clearPracticeForm();
+      showAlert("#add-practice", "alert-success", "Practice session added!");
+    })
+    .catch(err => {
+      showAlert("#add-practice", "alert-danger", err.message);
+    });
 };
 
 /**
  * Updates the list of practice sessions in the UI.
+ *
+ * @param snapshot The collection snapshot from the firestore database
+ *                 containing the most up to date practice sessions
  */
 export const updatePracticesUI = snapshot => {
+  practicesUI.innerHTML = "";
   if (snapshot.size > 0) {
     snapshot.forEach(doc => {
       const practiceSession = doc.data();
@@ -248,39 +241,11 @@ export const updatePracticesUI = snapshot => {
 
       // Add the new practice session to the UI
       practicesUI.prepend(newPractice);
-
-      // Add the event listeners for the options buttons now that they
-      // are in the DOM
-      editButton.addEventListener("click", editPracticeSession);
-      deleteButton.addEventListener("click", deletePracticeSession);
     });
   } else {
     practicesUI.innerHTML += "Practice makes perfect!";
   }
 };
-
-/**
- *
- * @param {Event} e Event used to target the practice session to edit
- */
-const editPracticeSession = e => {};
-
-/**
- *
- *
- * @param {Event} e Event used to avoid form submission default behavior
- */
-const confirmPracticeEdit = e => {
-  e.preventDefault();
-};
-
-/**
- * Gets the practice session that was clicked for delete and removes
- * it from the application.
- *
- * @param {Event} e Event used to target the practice session to delete
- */
-const deletePracticeSession = e => {};
 
 /**
  * Changes the active menu of the application.
@@ -326,20 +291,23 @@ const toggleSidebar = () => {
 };
 
 // Add event listeners
-document
-  .getElementById("add-scorecard")
-  .addEventListener("click", addScorecard);
-document.querySelectorAll(".sidebar-link").forEach(link => {
-  if (!link.classList.contains("logout")) {
-    link.addEventListener("click", changeMenu);
-  }
-});
-document.getElementById("add-practice").addEventListener("click", addPractice);
-document
-  .getElementById("edit-practice")
-  .addEventListener("click", confirmPracticeEdit);
-document.querySelector(".mobile-menu").addEventListener("click", toggleSidebar);
-document.querySelector(".logout").addEventListener("click", () => {
-  auth.signOut();
-  window.location.replace("./index.html");
-});
+if (window.location.href.endsWith("dashboard.html")) {
+  document
+    .getElementById("add-scorecard")
+    .addEventListener("click", addScorecard);
+  document.querySelectorAll(".sidebar-link").forEach(link => {
+    if (!link.classList.contains("logout")) {
+      link.addEventListener("click", changeMenu);
+    }
+  });
+  document
+    .getElementById("add-practice")
+    .addEventListener("click", addPractice);
+  document
+    .querySelector(".mobile-menu")
+    .addEventListener("click", toggleSidebar);
+  document.querySelector(".logout").addEventListener("click", () => {
+    auth.signOut();
+    window.location.replace("./index.html");
+  });
+}

@@ -1,7 +1,8 @@
 import {
   updateScorecardsUI,
   updateTrophiesUI,
-  updatePracticesUI
+  updatePracticesUI,
+  updateTrophies
 } from "./index.js";
 import { auth, db } from "./firebase-config.js";
 
@@ -19,6 +20,7 @@ auth.onAuthStateChanged(user => {
       .where("user", "==", user.uid)
       .onSnapshot(snapshot => {
         updateScorecardsUI(snapshot);
+        updateTrophies(user, snapshot, "scorecards");
       });
     db.collection("trophies")
       .where("user", "==", user.uid)
@@ -29,6 +31,7 @@ auth.onAuthStateChanged(user => {
       .where("user", "==", user.uid)
       .onSnapshot(snapshot => {
         updatePracticesUI(snapshot);
+        updateTrophies(user, snapshot, "practiceSessions");
       });
   } else {
     // If not logged in make sure the user is at the landing page
