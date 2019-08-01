@@ -13,10 +13,10 @@ fun and challenging project to create a Progressive Web Application that golfers
 the course but also at home on a desktop or laptop post round.
 
 ## Screenshots
-![Landing Page](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-landing.PNG?token=AHSEPLHWYJW6KZYLWSF6BZC5HOR4K "Landing Page")
-![Dashboard Scorecards](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-scorecards.PNG?token=AHSEPLB6AJG2AINLO5YPUOK5HOQJ2 "Dashboard Scorecards")
-![Dashboard Trophies](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-trophies.PNG?token=AHSEPLDFPHJHOLF3RVQO6OC5HOQNC "Dashboard Trophies")
-![Dashboard Practice](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-practice.PNG?token=AHSEPLFDLO72LVZENOAIKP25HOQPW "Dashboard Practice")
+![Landing Page](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-landing.PNG?token=AHSEPLCCWHKCLGKTFBAJTVC5JOZ4W "Landing Page")
+![Dashboard Scorecards](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-scorecards.PNG?token=AHSEPLBUSQZ4ZBXWZ54C5EK5JO2C4 "Dashboard Scorecards")
+![Dashboard Trophies](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-trophies.PNG?token=AHSEPLAHZFX5BRSLSGHAADK5JO2EK "Dashboard Trophies")
+![Dashboard Practice](https://raw.githubusercontent.com/morrisbc/readme-images/master/golfsucks/golfsucks-practice.PNG?token=AHSEPLEOAXERSFONBDOK5W25JO2FW "Dashboard Practice")
 
 ## Features
 * Add new scorecards with nine or eighteen hole scores to a running list of previously added
