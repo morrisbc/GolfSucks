@@ -33,7 +33,7 @@ Front End
 * :icecream: JavaScript
 
 Back End
-* Local Storage
+* [Firebase](https://firebase.google.com/)
 
 ## Other Resources Used
 * [Font Awesome](https://fontawesome.com/)
