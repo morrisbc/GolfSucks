@@ -25,14 +25,14 @@ const addScorecard = e => {
   e.preventDefault();
 
   const scorecard = getScorecard();
-  if (scorecard) {
+  try {
     db.collection("scorecards")
       .add(scorecard)
       .then(() => {
         clearScorecard();
         showAlert("#add-scorecard", "alert-success", "Scorecard Added!");
       });
-  } else {
+  } catch (err) {
     showAlert(
       "#add-scorecard",
       "alert-danger",
@@ -221,15 +221,20 @@ const addPractice = e => {
   e.preventDefault();
   const practiceSession = getPractice();
 
-  db.collection("practiceSessions")
-    .add(practiceSession)
-    .then(() => {
-      clearPracticeForm();
-      showAlert("#add-practice", "alert-success", "Practice session added!");
-    })
-    .catch(err => {
-      showAlert("#add-practice", "alert-danger", err.message);
-    });
+  try {
+    db.collection("practiceSessions")
+      .add(practiceSession)
+      .then(() => {
+        clearPracticeForm();
+        showAlert("#add-practice", "alert-success", "Practice session added!");
+      });
+  } catch (err) {
+    showAlert(
+      "#add-practice",
+      "alert-danger",
+      "Please submit a valid practice session."
+    );
+  }
 };
 
 /**

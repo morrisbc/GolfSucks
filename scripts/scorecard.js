@@ -36,7 +36,7 @@ const scorecard = {
   out: 0,
   in: 0,
   total: 0,
-  location: null,
+  course: null,
   date: null,
   user: ""
 };
