@@ -36,6 +36,7 @@ const scorecard = {
   out: 0,
   in: 0,
   total: 0,
+  nineHoles: false,
   course: null,
   date: null,
   user: ""
@@ -137,6 +138,9 @@ const scorecardIsValid = () => {
 export const getScorecard = () => {
   if (scorecardIsValid()) {
     scorecard.user = auth.currentUser.uid;
+    if (scorecard.in === 0 || scorecard.out === 0) {
+      scorecard.nineHoles = true;
+    }
     return scorecard;
   } else {
     return null;

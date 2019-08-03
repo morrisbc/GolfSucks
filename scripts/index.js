@@ -101,51 +101,84 @@ export const updateTrophies = (user, snapshot, collectionName) => {
     .where("user", "==", user.uid)
     .get()
     .then(trophySnapshot => {
-      let trophiesDoc;
+      let trophiesDoc = trophySnapshot.docs[0];
 
-      trophySnapshot.forEach(doc => {
-        trophiesDoc = doc;
-      });
-
+      // User hasn't had a trophy document created yet. Initialize one
+      // and update it.
       if (!trophiesDoc) {
-        db.collection("trophies")
-          .add({
-            scorecardsPosted: 0,
-            practicesPosted: 0,
-            lowestEighteen: 0,
-            lowestNine: 0,
-            user: user.uid
-          })
-          .then(doc => {
-            if (collectionName === "scorecards") {
-              db.collection("trophies")
-                .doc(doc.id)
-                .update({
-                  scorecardsPosted: snapshot.size,
-                  user: user.uid
-                })
-                .catch(err => console.log(err.message));
-            }
-
-            if (collectionName === "practiceSessions") {
-              db.collection("trophies")
-                .doc(doc.id)
-                .update({
-                  practicesPosted: snapshot.size,
-                  user: user.uid
-                })
-                .catch(err => console.log(err.message));
-            }
-          });
+        switch (collectionName) {
+          case "scorecards":
+            db.collection("trophies").add({
+              scorecardsPosted: snapshot.size,
+              practicesPosted: 0,
+              lowestEighteen: 0,
+              lowestNine: 0,
+              user: user.uid
+            });
+            break;
+          case "practiceSessions":
+            db.collection("trophies").add({
+              scorecardsPosted: 0,
+              practicesPosted: snapshot.size,
+              lowestEighteen: 0,
+              lowestNine: 0,
+              user: user.uid
+            });
+            break;
+          default:
+          // Do Nothing
+        }
       } else {
         if (collectionName === "scorecards") {
-          db.collection("trophies")
-            .doc(trophiesDoc.id)
-            .update({
-              scorecardsPosted: snapshot.size,
-              user: user.uid
-            })
-            .catch(err => console.log(err.message));
+          if (snapshot.size) {
+            Promise.all([
+              db
+                .collection("scorecards")
+                .where("user", "==", user.uid)
+                .where("in", ">", 0)
+                .orderBy("in")
+                .limit(1)
+                .get(),
+              db
+                .collection("scorecards")
+                .where("user", "==", user.uid)
+                .where("out", ">", 0)
+                .orderBy("out")
+                .limit(1)
+                .get(),
+              db
+                .collection("scorecards")
+                .where("user", "==", user.uid)
+                .where("nineHoles", "==", false)
+                .orderBy("total")
+                .limit(1)
+                .get()
+            ])
+              .then(promises => {
+                const lowestIn = promises[0].docs[0].data().in;
+                const lowestOut = promises[1].docs[0].data().out;
+                const lowestScore = promises[2].docs[0].data().total;
+
+                db.collection("trophies")
+                  .doc(trophiesDoc.id)
+                  .update({
+                    scorecardsPosted: snapshot.size,
+                    lowestNine: Math.min(lowestIn, lowestOut),
+                    lowestEighteen: lowestScore,
+                    user: user.uid
+                  });
+              })
+              .catch(err => console.log(err.message));
+          } else {
+            db.collection("trophies")
+              .doc(trophiesDoc.id)
+              .update({
+                scorecardsPosted: 0,
+                lowestNine: 0,
+                lowestEighteen: 0,
+                user: user.uid
+              });
+          }
         }
 
         if (collectionName === "practiceSessions") {
