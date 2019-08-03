@@ -42,6 +42,37 @@ const addScorecard = e => {
 };
 
 /**
+ *
+ */
+const deleteScorecard = e => {
+  let scorecardUID;
+
+  // The target was the icon rather than the button
+  if (e.target.classList.contains("fa-times")) {
+    scorecardUID =
+      e.target.parentElement.parentElement.parentElement.dataset.uid;
+  } else {
+    scorecardUID = e.target.parentElement.parentElement.dataset.uid;
+  }
+
+  if (confirm("Are you sure you want to delete this scorecard?")) {
+    db.collection("scorecards")
+      .doc(scorecardUID)
+      .delete()
+      .then(() => {
+        showAlert("#add-scorecard", "alert-success", "Scorecard Deleted!");
+      })
+      .catch(() => {
+        showAlert(
+          "#add-scorecard",
+          "alert-danger",
+          "Unable to delete scorecard."
+        );
+      });
+  }
+};
+
+/**
  * Updates the scorecards UI.
  *
  * @param snapshot The collection snapshot from the firestore database
@@ -56,7 +87,7 @@ export const updateScorecardsUI = snapshot => {
       // Create the new scorecard element
       let newScorecard = document.createElement("div");
       newScorecard.className = "old-scorecard";
-      newScorecard.id = `scorecard-${doc.id}`;
+      newScorecard.dataset.uid = doc.id;
       newScorecard.appendChild(
         document.createTextNode(JSON.stringify(scorecard))
       );
@@ -76,6 +107,8 @@ export const updateScorecardsUI = snapshot => {
       deleteButton.className = "delete-item";
       deleteButton.innerHTML = "<i class='fas fa-times'></i>";
       options.appendChild(deleteButton);
+
+      deleteButton.addEventListener("click", deleteScorecard);
 
       // Add the options div to the scorecard element
       newScorecard.appendChild(options);
@@ -155,9 +188,19 @@ export const updateTrophies = (user, snapshot, collectionName) => {
                 .get()
             ])
               .then(promises => {
-                const lowestIn = promises[0].docs[0].data().in;
-                const lowestOut = promises[1].docs[0].data().out;
-                const lowestScore = promises[2].docs[0].data().total;
+                let lowestIn = 0;
+                let lowestOut = 0;
+                let lowestScore = 0;
+
+                if (lowestIn) {
+                  lowestIn = promises[0].docs[0].data().in;
+                }
+                if (lowestOut) {
+                  lowestOut = promises[1].docs[0].data().out;
+                }
+                if (lowestIn) {
+                  lowestScore = promises[2].docs[0].data().total;
+                }
 
                 db.collection("trophies")
                   .doc(trophiesDoc.id)
@@ -192,32 +235,6 @@ export const updateTrophies = (user, snapshot, collectionName) => {
         }
       }
     });
-
-  // // Update the lowest 9 trophy
-  // const scorecard = getScorecard();
-  // if (scorecard.out > 0) {
-  //   if (trophies.lowest9 === 0) {
-  //     trophies.lowest9 = scorecard.out;
-  //   } else {
-  //     trophies.lowest9 = Math.min(trophies.lowest9, scorecard.out);
-  //   }
-  // }
-
-  // if (scorecard.in > 0) {
-  //   if (trophies.lowest9 === 0) {
-  //     trophies.lowest9 = scorecard.in;
-  //   } else {
-  //     trophies.lowest9 = Math.min(trophies.lowest9, scorecard.in);
-  //   }
-  // }
-
-  // // Update the lowest 18 trophy
-  // if (scorecard.out > 0 && scorecard.in > 0) {
-  //   trophies.lowest18 =
-  //     trophies.lowest18 === 0
-  //       ? scorecard.total
-  //       : Math.min(trophies.lowest18, scorecard.total);
-  // }
 };
 
 /**
