@@ -379,6 +379,26 @@ footer {
   margin-bottom: 2rem;
 }
 
+.course-date-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.course-wrap,
+.date-wrap {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 2rem;
+}
+
+#course-name,
+#round-date {
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1rem;
+}
+
 .new-nine {
   display: grid;
   justify-content: center;
@@ -748,6 +768,10 @@ footer {
 
   .new-scorecard {
     margin-bottom: 1rem;
+  }
+
+  .course-date-wrap {
+    flex-direction: column;
   }
 
   #add-scorecard {

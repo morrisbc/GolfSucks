@@ -1,5 +1,7 @@
 import { auth } from "./firebase-config.js";
 
+let courseNameElem = document.getElementById("course-name");
+const dateElem = document.getElementById("round-date");
 const outNineElem = document.getElementById("out");
 const inNineElem = document.getElementById("in");
 const totalElem = document.getElementById("total");
@@ -127,7 +129,11 @@ const calculateTotalScore = () => {
  * @return A boolean determining the validity of the scorecard
  */
 const scorecardIsValid = () => {
-  return scorecard.total > 0 && (scorecard.out > 0 || scorecard.in > 0);
+  return (
+    scorecard.total > 0 &&
+    (scorecard.out > 0 || scorecard.in > 0) &&
+    courseNameElem.value !== ""
+  );
 };
 
 /**
@@ -137,10 +143,12 @@ const scorecardIsValid = () => {
  */
 export const getScorecard = () => {
   if (scorecardIsValid()) {
-    scorecard.user = auth.currentUser.uid;
+    scorecard.course = courseNameElem.value;
+    scorecard.date = dateElem.value;
     if (scorecard.in === 0 || scorecard.out === 0) {
       scorecard.nineHoles = true;
     }
+    scorecard.user = auth.currentUser.uid;
     return scorecard;
   } else {
     return null;
@@ -159,6 +167,8 @@ export const clearScorecard = () => {
   });
   scorecard.out = scorecard.in = scorecard.total = 0;
   scorecard.location = scorecard.date = null;
+  courseNameElem.value = "";
+  dateElem.value = "";
   updateScorecardUI();
 };
 
