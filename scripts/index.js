@@ -42,7 +42,7 @@ const addScorecard = e => {
 };
 
 /**
- *
+ * Deletes a scorecard from the application.
  */
 const deleteScorecard = e => {
   let scorecardUID;
@@ -287,6 +287,38 @@ const addPractice = e => {
   }
 };
 
+const deletePractice = e => {
+  let practiceUID;
+
+  // The target was the icon rather than the button
+  if (e.target.classList.contains("fa-times")) {
+    practiceUID =
+      e.target.parentElement.parentElement.parentElement.dataset.uid;
+  } else {
+    practiceUID = e.target.parentElement.parentElement.dataset.uid;
+  }
+
+  if (confirm("Are you sure you want to delete this practice session?")) {
+    db.collection("practiceSessions")
+      .doc(practiceUID)
+      .delete()
+      .then(() => {
+        showAlert(
+          "#add-practice",
+          "alert-success",
+          "Practice Session Deleted!"
+        );
+      })
+      .catch(() => {
+        showAlert(
+          "#add-practice",
+          "alert-danger",
+          "Unable to delete practice session."
+        );
+      });
+  }
+};
+
 /**
  * Updates the list of practice sessions in the UI.
  *
@@ -302,7 +334,7 @@ export const updatePracticesUI = snapshot => {
       // Create the new practice session element
       let newPractice = document.createElement("div");
       newPractice.className = "practice-session";
-      newPractice.id = `practice-${doc.id}`;
+      newPractice.dataset.uid = doc.id;
       newPractice.appendChild(
         document.createTextNode(JSON.stringify(practiceSession))
       );
@@ -322,6 +354,8 @@ export const updatePracticesUI = snapshot => {
       deleteButton.className = "delete-item";
       deleteButton.innerHTML = "<i class='fas fa-times'></i>";
       options.appendChild(deleteButton);
+
+      deleteButton.addEventListener("click", deletePractice);
 
       // Add the options div to the practice session element
       newPractice.appendChild(options);
