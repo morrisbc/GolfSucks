@@ -51,8 +51,8 @@ const scorecard = {
  * Updates the scorecard UI based on the values in the scorecard object.
  */
 export const updateScorecardUI = () => {
-  courseNameElem.value = scorecard.course || "";
-  dateElem.value = scorecard.date || "";
+  // courseNameElem.value = scorecard.course || "";
+  // dateElem.value = scorecard.date || "";
   frontNineElems.forEach((holeInput, holeNumber) => {
     holeInput.value = scorecard.frontNine[`hole${holeNumber + 1}`] || "";
   });
@@ -177,8 +177,8 @@ export const getScorecard = () => {
  * Clears the scoreard's values and updates the scorecard UI.
  */
 export const clearScorecard = () => {
-  scorecard.course = "";
-  scorecard.date = "";
+  courseNameElem.value = "";
+  dateElem.value = "";
   Object.keys(scorecard.frontNine).forEach(key => {
     scorecard.frontNine[key] = 0;
   });

@@ -259,18 +259,21 @@ export const updateTrophies = (user, snapshot, collectionName) => {
                 .get()
             ])
               .then(promises => {
-                let lowestIn = 0;
-                let lowestOut = 0;
-                let lowestScore = 0;
+                // lowestIn and lowestOut have default MAX_VALUE values since
+                // they are compared later using Math.min as a default of 0
+                // will cause the lowestNine trophy to always be 0
+                let lowestIn = Number.MAX_VALUE;
+                let lowestOut = Number.MAX_VALUE;
+                let lowestEighteen = 0;
 
-                if (lowestIn) {
+                if (promises[0].docs[0]) {
                   lowestIn = promises[0].docs[0].data().in;
                 }
-                if (lowestOut) {
+                if (promises[1].docs[0]) {
                   lowestOut = promises[1].docs[0].data().out;
                 }
-                if (lowestIn) {
-                  lowestScore = promises[2].docs[0].data().total;
+                if (promises[2].docs[0]) {
+                  lowestEighteen = promises[2].docs[0].data().total;
                 }
 
                 db.collection("trophies")
@@ -278,7 +281,7 @@ export const updateTrophies = (user, snapshot, collectionName) => {
                   .update({
                     scorecardsPosted: snapshot.size,
                     lowestNine: Math.min(lowestIn, lowestOut),
-                    lowestEighteen: lowestScore,
+                    lowestEighteen: lowestEighteen,
                     user: user.uid
                   });
               })
