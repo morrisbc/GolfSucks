@@ -6,7 +6,16 @@ import {
   showEditButton,
   showAddButton
 } from "./practice.js";
-import { clearScorecard, getScorecard } from "./scorecard.js";
+import {
+  clearScorecard,
+  getScorecard,
+  setScorecard,
+  updateScorecardUI,
+  showEditScorecardButtons,
+  hideEditScorecardButtons,
+  showAddScorecard,
+  hideAddScorecard
+} from "./scorecard.js";
 import { showAlert } from "./utilities.js";
 
 let activeMenu = document.querySelector(".scorecards");
@@ -14,6 +23,9 @@ let activeMenuLink = document.getElementById("scorecards-link");
 const scorecardsUI = document.querySelector(".old-scorecards");
 const trophiesUI = document.querySelector(".trophies");
 const practicesUI = document.querySelector(".practice-sessions");
+
+let scorecardToEdit = null;
+let practiceToEdit = null;
 
 /**
  * Adds a new scorecard to the application, saving the new scorecard
@@ -30,14 +42,10 @@ const addScorecard = e => {
       .add(scorecard)
       .then(() => {
         clearScorecard();
-        showAlert("#add-scorecard", "alert-success", "Scorecard Added!");
+        showAlert(".buttons", "alert-success", "Scorecard Added!");
       });
   } catch (err) {
-    showAlert(
-      "#add-scorecard",
-      "alert-danger",
-      "Please submit a valid scorecard."
-    );
+    showAlert(".buttons", "alert-danger", "Please submit a valid scorecard.");
   }
 };
 
@@ -60,16 +68,78 @@ const deleteScorecard = e => {
       .doc(scorecardUID)
       .delete()
       .then(() => {
-        showAlert("#add-scorecard", "alert-success", "Scorecard Deleted!");
+        showAlert(".buttons", "alert-success", "Scorecard Deleted!");
       })
       .catch(() => {
-        showAlert(
-          "#add-scorecard",
-          "alert-danger",
-          "Unable to delete scorecard."
-        );
+        showAlert(".buttons", "alert-danger", "Unable to delete scorecard.");
       });
   }
+};
+
+/**
+ * Edits a scorecard in the application and stores the new values in the
+ * firestore.
+ *
+ * @param {Event} e Used to prevent default behavior of submit
+ */
+const editScorecard = e => {
+  e.preventDefault();
+
+  try {
+    db.collection("scorecards")
+      .doc(scorecardToEdit)
+      .set(getScorecard())
+      .then(() => {
+        clearScorecard();
+        updateScorecardUI();
+        hideEditScorecardButtons();
+        showAddScorecard();
+        showAlert(".buttons", "alert-success", "Scorecard Edited!");
+      });
+  } catch (err) {
+    showAlert(".buttons", "alert-danger", "Unable to update scorecard.");
+  }
+};
+
+/**
+ * Displays the necessary buttons and populates the form fields with the data
+ * from the scorecard to edit.
+ */
+const showEditScorecardState = e => {
+  let scorecardUID;
+
+  // The target was the icon rather than the button
+  if (e.target.classList.contains("fa-pencil-alt")) {
+    scorecardUID =
+      e.target.parentElement.parentElement.parentElement.dataset.uid;
+  } else {
+    scorecardUID = e.target.parentElement.parentElement.dataset.uid;
+  }
+
+  db.collection("scorecards")
+    .doc(scorecardUID)
+    .get()
+    .then(doc => {
+      scorecardToEdit = scorecardUID;
+      setScorecard(doc.data());
+      updateScorecardUI();
+      showEditScorecardButtons();
+      hideAddScorecard();
+    });
+};
+
+/**
+ * Hides the necessary buttons and clears the fields of the scorecard form.
+ *
+ * @param {Event} e Used to prevent default behavior
+ */
+const hideEditState = e => {
+  e.preventDefault();
+
+  clearScorecard();
+  updateScorecardUI();
+  hideEditScorecardButtons();
+  showAddScorecard();
 };
 
 /**
@@ -108,6 +178,7 @@ export const updateScorecardsUI = snapshot => {
       deleteButton.innerHTML = "<i class='fas fa-times'></i>";
       options.appendChild(deleteButton);
 
+      editButton.addEventListener("click", showEditScorecardState);
       deleteButton.addEventListener("click", deleteScorecard);
 
       // Add the options div to the scorecard element
@@ -276,11 +347,11 @@ const addPractice = e => {
       .add(practiceSession)
       .then(() => {
         clearPracticeForm();
-        showAlert("#add-practice", "alert-success", "Practice session added!");
+        showAlert(".buttons", "alert-success", "Practice session added!");
       });
   } catch (err) {
     showAlert(
-      "#add-practice",
+      ".buttons",
       "alert-danger",
       "Please submit a valid practice session."
     );
@@ -303,15 +374,11 @@ const deletePractice = e => {
       .doc(practiceUID)
       .delete()
       .then(() => {
-        showAlert(
-          "#add-practice",
-          "alert-success",
-          "Practice Session Deleted!"
-        );
+        showAlert(".buttons", "alert-success", "Practice Session Deleted!");
       })
       .catch(() => {
         showAlert(
-          "#add-practice",
+          ".buttons",
           "alert-danger",
           "Unable to delete practice session."
         );
@@ -416,6 +483,12 @@ if (window.location.href.endsWith("dashboard.html")) {
   document
     .getElementById("add-scorecard")
     .addEventListener("click", addScorecard);
+  document
+    .getElementById("edit-scorecard")
+    .addEventListener("click", editScorecard);
+  document
+    .getElementById("cancel-edit-scorecard")
+    .addEventListener("click", hideEditState);
   document.querySelectorAll(".sidebar-link").forEach(link => {
     if (!link.classList.contains("logout")) {
       link.addEventListener("click", changeMenu);

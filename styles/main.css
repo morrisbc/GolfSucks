@@ -428,10 +428,23 @@ footer {
   border: 2px solid var(--accent-color);
 }
 
-#add-scorecard {
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+#add-scorecard,
+#edit-scorecard,
+#cancel-edit-scorecard {
   margin-top: 1rem;
   width: 30%;
   min-width: 288px;
+}
+
+#edit-scorecard,
+#cancel-edit-scorecard {
+  display: none;
 }
 
 .old-scorecards {
@@ -629,6 +642,18 @@ footer {
   }
 }
 
+@media screen and (max-width: 800px) {
+  .buttons {
+    flex-direction: column;
+  }
+
+  #add-scorecard,
+  #edit-scorecard,
+  #cancel-edit-scorecard {
+    width: 90%;
+  }
+}
+
 @media screen and (max-width: 750px) {
   .trophies {
     grid-template-columns: repeat(3, 1fr);
@@ -772,10 +797,6 @@ footer {
 
   .course-date-wrap {
     flex-direction: column;
-  }
-
-  #add-scorecard {
-    width: 90%;
   }
 
   .old-scorecards {

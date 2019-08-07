@@ -11,6 +11,9 @@ const frontNineElems = document.querySelectorAll(
 const backNineElems = document.querySelectorAll(
   ".new-back-nine .new-hole-score"
 );
+const addScorecard = document.getElementById("add-scorecard");
+const editScorecard = document.getElementById("edit-scorecard");
+const cancelEditScorecard = document.getElementById("cancel-edit-scorecard");
 
 const scorecard = {
   frontNine: {
@@ -39,7 +42,7 @@ const scorecard = {
   in: 0,
   total: 0,
   nineHoles: false,
-  course: null,
+  course: "",
   date: null,
   user: ""
 };
@@ -47,7 +50,9 @@ const scorecard = {
 /**
  * Updates the scorecard UI based on the values in the scorecard object.
  */
-const updateScorecardUI = () => {
+export const updateScorecardUI = () => {
+  courseNameElem.value = scorecard.course || "";
+  dateElem.value = scorecard.date || "";
   frontNineElems.forEach((holeInput, holeNumber) => {
     holeInput.value = scorecard.frontNine[`hole${holeNumber + 1}`] || "";
   });
@@ -137,6 +142,19 @@ const scorecardIsValid = () => {
 };
 
 /**
+ * Updates the fields of the scorecard object with those of the provided new
+ * scorecard object.
+ *
+ * @param {Object} newScorecard The new scorecard object whose fields will be
+ *                              used to update the scorecard object
+ */
+export const setScorecard = newScorecard => {
+  for (let key in scorecard) {
+    scorecard[key] = newScorecard[key];
+  }
+};
+
+/**
  * Returns the scorecard object if the scorecard is valid, null otherwise.
  *
  * @return The scorecard object if the scorecard is valid, null otherwise.
@@ -159,6 +177,8 @@ export const getScorecard = () => {
  * Clears the scoreard's values and updates the scorecard UI.
  */
 export const clearScorecard = () => {
+  scorecard.course = "";
+  scorecard.date = "";
   Object.keys(scorecard.frontNine).forEach(key => {
     scorecard.frontNine[key] = 0;
   });
@@ -166,10 +186,38 @@ export const clearScorecard = () => {
     scorecard.backNine[key] = 0;
   });
   scorecard.out = scorecard.in = scorecard.total = 0;
-  scorecard.location = scorecard.date = null;
-  courseNameElem.value = "";
-  dateElem.value = "";
+  scorecard.course = scorecard.date = "";
   updateScorecardUI();
+};
+
+/**
+ * Displays the 'Edit Scorecard' button within the scorecard form.
+ */
+export const showEditScorecardButtons = () => {
+  editScorecard.style.display = "block";
+  cancelEditScorecard.style.display = "block";
+};
+
+/**
+ * Displays the 'Add Scorecard' button within the scorecard form.
+ */
+export const showAddScorecard = () => {
+  addScorecard.style.display = "block";
+};
+
+/**
+ * Hides the 'Edit Scorecard' button within the scorecard form.
+ */
+export const hideEditScorecardButtons = () => {
+  editScorecard.style.display = "none";
+  cancelEditScorecard.style.display = "none";
+};
+
+/**
+ * Hides the 'Add Scorecard' button within the scorecard form.
+ */
+export const hideAddScorecard = () => {
+  addScorecard.style.display = "none";
 };
 
 // Add event listeners
