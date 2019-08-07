@@ -133,7 +133,7 @@ const showEditScorecardState = e => {
  *
  * @param {Event} e Used to prevent default behavior
  */
-const hideEditState = e => {
+const hideEditScorecardState = e => {
   e.preventDefault();
 
   clearScorecard();
@@ -491,7 +491,7 @@ if (window.location.href.endsWith("dashboard.html")) {
     .addEventListener("click", editScorecard);
   document
     .getElementById("cancel-edit-scorecard")
-    .addEventListener("click", hideEditState);
+    .addEventListener("click", hideEditScorecardState);
   document.querySelectorAll(".sidebar-link").forEach(link => {
     if (!link.classList.contains("logout")) {
       link.addEventListener("click", changeMenu);

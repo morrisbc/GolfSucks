@@ -51,8 +51,8 @@ const scorecard = {
  * Updates the scorecard UI based on the values in the scorecard object.
  */
 export const updateScorecardUI = () => {
-  // courseNameElem.value = scorecard.course || "";
-  // dateElem.value = scorecard.date || "";
+  courseNameElem.value = scorecard.course || "";
+  dateElem.value = scorecard.date || "";
   frontNineElems.forEach((holeInput, holeNumber) => {
     holeInput.value = scorecard.frontNine[`hole${holeNumber + 1}`] || "";
   });
@@ -177,8 +177,7 @@ export const getScorecard = () => {
  * Clears the scoreard's values and updates the scorecard UI.
  */
 export const clearScorecard = () => {
-  courseNameElem.value = "";
-  dateElem.value = "";
+  scorecard.course = scorecard.date = "";
   Object.keys(scorecard.frontNine).forEach(key => {
     scorecard.frontNine[key] = 0;
   });
@@ -186,7 +185,6 @@ export const clearScorecard = () => {
     scorecard.backNine[key] = 0;
   });
   scorecard.out = scorecard.in = scorecard.total = 0;
-  scorecard.course = scorecard.date = "";
   updateScorecardUI();
 };
 
@@ -221,6 +219,12 @@ export const hideAddScorecard = () => {
 };
 
 // Add event listeners
+courseNameElem.addEventListener("keyup", e => {
+  scorecard.course = e.target.value;
+});
+dateElem.addEventListener("change", e => {
+  scorecard.date = e.target.value;
+});
 frontNineElems.forEach(holeInput => {
   holeInput.addEventListener("blur", calculateFrontNineScore);
 });
