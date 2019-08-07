@@ -612,6 +612,7 @@ footer {
   border: none;
   font-size: 1.25rem;
   cursor: pointer;
+  margin: 0 1rem;
 }
 
 /*
@@ -720,6 +721,10 @@ footer {
     overflow: hidden;
     position: fixed;
     z-index: 1;
+  }
+
+  .item-options button {
+    font-size: 1.5rem;
   }
 }
 
