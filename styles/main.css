@@ -673,12 +673,6 @@ footer {
 }
 
 @media screen and (max-width: 750px) {
-  .trophies {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media screen and (max-width: 700px) {
   .container {
     padding-left: 0;
   }
@@ -738,6 +732,10 @@ footer {
     overflow: hidden;
     position: fixed;
     z-index: 1;
+  }
+
+  .trophies {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .item-options button {
