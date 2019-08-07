@@ -76,6 +76,9 @@
   padding: 10px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
   -webkit-appearance: none;
+  margin-top: 1rem;
+  width: 30%;
+  min-width: 288px;
 }
 
 .submit-btn:hover {
@@ -428,19 +431,20 @@ footer {
   border: 2px solid var(--accent-color);
 }
 
-.buttons {
+.scorecard-buttons,
+.practice-buttons {
   display: flex;
   justify-content: space-around;
   width: 100%;
 }
 
-#add-scorecard,
+/* #add-scorecard,
 #edit-scorecard,
 #cancel-edit-scorecard {
   margin-top: 1rem;
   width: 30%;
   min-width: 288px;
-}
+} */
 
 #edit-scorecard,
 #cancel-edit-scorecard {
@@ -517,6 +521,7 @@ footer {
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  width: 565px;
 }
 
 .practice-time {
@@ -534,7 +539,8 @@ footer {
 #time-start,
 #time-end {
   border: 2px solid var(--primary-color);
-  border-radius: 10px;
+  border-radius: 5px;
+  padding: 5px;
   font-size: 1rem;
   text-align: center;
 }
@@ -576,13 +582,16 @@ footer {
   font-size: 1rem;
 }
 
-.practice-btn {
+/* .practice-btn {
   margin: 1rem 0;
   width: 100%;
-}
+} */
 
-#edit-practice {
+#edit-practice,
+#cancel-edit-practice {
   display: none;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .practice-sessions {
@@ -600,6 +609,7 @@ footer {
   margin: 1rem 0;
   border: 2px solid var(--primary-color);
   border-radius: 15px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
   word-break: break-all;
 }
 
@@ -643,8 +653,9 @@ footer {
   }
 }
 
-@media screen and (max-width: 800px) {
-  .buttons {
+@media screen and (max-width: 830px) {
+  .scorecard-buttons,
+  .practice-buttons {
     flex-direction: column;
   }
 
@@ -652,6 +663,12 @@ footer {
   #edit-scorecard,
   #cancel-edit-scorecard {
     width: 90%;
+  }
+
+  #add-practice,
+  #edit-practice,
+  #cancel-edit-practice {
+    width: 100%;
   }
 }
 
@@ -728,7 +745,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 535px) {
+@media screen and (max-width: 600px) {
   .practice-form {
     width: 100%;
   }
@@ -825,9 +842,9 @@ footer {
     width: 50%;
   }
 
-  .practice-btn {
+  /* .practice-btn {
     width: 100%;
-  }
+  } */
 
   .practice-sessions {
     width: 100%;

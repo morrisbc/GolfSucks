@@ -192,15 +192,15 @@ export const clearScorecard = () => {
  * Displays the 'Edit Scorecard' button within the scorecard form.
  */
 export const showEditScorecardButtons = () => {
-  editScorecard.style.display = "block";
-  cancelEditScorecard.style.display = "block";
+  editScorecard.style.display = "flex";
+  cancelEditScorecard.style.display = "flex";
 };
 
 /**
  * Displays the 'Add Scorecard' button within the scorecard form.
  */
 export const showAddScorecard = () => {
-  addScorecard.style.display = "block";
+  addScorecard.style.display = "flex";
 };
 
 /**
@@ -219,21 +219,23 @@ export const hideAddScorecard = () => {
 };
 
 // Add event listeners
-courseNameElem.addEventListener("keyup", e => {
-  scorecard.course = e.target.value;
-});
-dateElem.addEventListener("change", e => {
-  scorecard.date = e.target.value;
-});
-frontNineElems.forEach(holeInput => {
-  holeInput.addEventListener("blur", calculateFrontNineScore);
-});
+if (window.location.href.endsWith("dashboard.html")) {
+  courseNameElem.addEventListener("keyup", e => {
+    scorecard.course = e.target.value;
+  });
+  dateElem.addEventListener("change", e => {
+    scorecard.date = e.target.value;
+  });
+  frontNineElems.forEach(holeInput => {
+    holeInput.addEventListener("blur", calculateFrontNineScore);
+  });
 
-backNineElems.forEach(holeInput => {
-  holeInput.addEventListener("blur", calculateBackNineScore);
-});
+  backNineElems.forEach(holeInput => {
+    holeInput.addEventListener("blur", calculateBackNineScore);
+  });
 
-document.querySelectorAll(".new-hole-score").forEach(holeInput => {
-  holeInput.addEventListener("blur", calculateTotalScore);
-  holeInput.addEventListener("blur", updateScorecardUI);
-});
+  document.querySelectorAll(".new-hole-score").forEach(holeInput => {
+    holeInput.addEventListener("blur", calculateTotalScore);
+    holeInput.addEventListener("blur", updateScorecardUI);
+  });
+}

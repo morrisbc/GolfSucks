@@ -9,6 +9,7 @@ const shortGame = document.querySelectorAll("#type-green div input");
 const notes = document.getElementById("practice-notes");
 const addPractice = document.getElementById("add-practice");
 const editPractice = document.getElementById("edit-practice");
+const cancelEditPractice = document.getElementById("cancel-edit-practice");
 
 // Private practice session object member
 const practiceSession = {
@@ -34,21 +35,24 @@ const practiceSession = {
  * Populates the practice form with the information from a given practice
  * session.
  *
- * @param {Object} practiceSession The practice session used to populate the
- *                                 form
+ * @param {Object} newPractice The practice session used to populate the
+ *                             form
  */
-export const populatePracticeSession = practice => {
+export const updatePracticeUI = () => {
+  practiceStart.value = practiceSession.startTime || "";
+  practiceEnd.value = practiceSession.endTime || "";
+
   fullSwing.forEach(formField => {
-    formField.checked = practice.fullSwing[formField.name];
-    formField.value = practice.fullSwing[formField.name];
+    formField.checked = practiceSession.fullSwing[formField.name];
+    formField.value = practiceSession.fullSwing[formField.name];
   });
 
   shortGame.forEach(formField => {
-    formField.checked = practice.shortGame[formField.name];
-    formField.value = practice.shortGame[formField.name];
+    formField.checked = practiceSession.shortGame[formField.name];
+    formField.value = practiceSession.shortGame[formField.name];
   });
 
-  notes.value = practice.notes;
+  notes.value = practiceSession.notes;
 };
 
 /**
@@ -115,8 +119,8 @@ const practiceIsValid = () => {
  */
 export const getPractice = () => {
   if (practiceIsValid()) {
-    practiceSession.startTime = Date.parse(practiceStart.value);
-    practiceSession.endTime = Date.parse(practiceEnd.value);
+    practiceSession.startTime = practiceStart.value;
+    practiceSession.endTime = practiceEnd.value;
     fullSwing.forEach(clubType => {
       practiceSession.fullSwing[clubType.name] = clubType.checked;
     });
@@ -131,20 +135,46 @@ export const getPractice = () => {
     return null;
   }
 };
+
 /**
- * Displays the add practice button and hides the edit practice button in
- * the practice form.
+ * Updates the fields of the practice object with those of the provided new
+ * practice object.
+ *
+ * @param {Object} newPractice The new practice object whose fields will be
+ *                              used to update the practice object
  */
-export const showAddButton = () => {
-  addPractice.style.display = "flex";
-  editPractice.style.display = "none";
+export const setPractice = newPractice => {
+  for (let key in practiceSession) {
+    practiceSession[key] = newPractice[key];
+  }
 };
 
 /**
- * Displays the edit practice button and hides the add practice button in
- * the practice form.
+ * Displays the add practice button in the practice form.
  */
-export const showEditButton = () => {
+export const showAddPractice = () => {
+  addPractice.style.display = "flex";
+};
+
+/**
+ * Displays the edit practice and cancel edit buttons in the practice form.
+ */
+export const showEditPracticeButtons = () => {
   editPractice.style.display = "flex";
+  cancelEditPractice.style.display = "flex";
+};
+
+/**
+ * Hides the add practice button in the practice form.
+ */
+export const hideAddPractice = () => {
   addPractice.style.display = "none";
+};
+
+/**
+ * Hides the edit practice and cancel edit buttons in the practice form.
+ */
+export const hideEditPracticeButtons = () => {
+  editPractice.style.display = "none";
+  cancelEditPractice.style.display = "none";
 };

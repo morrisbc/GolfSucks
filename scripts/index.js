@@ -1,10 +1,13 @@
 import { auth, db } from "./firebase-config.js";
 import {
   getPractice,
-  populatePracticeSession,
+  setPractice,
+  updatePracticeUI,
   clearPracticeForm,
-  showEditButton,
-  showAddButton
+  showEditPracticeButtons,
+  showAddPractice,
+  hideAddPractice,
+  hideEditPracticeButtons
 } from "./practice.js";
 import {
   clearScorecard,
@@ -42,10 +45,14 @@ const addScorecard = e => {
       .add(scorecard)
       .then(() => {
         clearScorecard();
-        showAlert(".buttons", "alert-success", "Scorecard Added!");
+        showAlert(".scorecard-buttons", "alert-success", "Scorecard Added!");
       });
   } catch (err) {
-    showAlert(".buttons", "alert-danger", "Please submit a valid scorecard.");
+    showAlert(
+      ".scorecard-buttons",
+      "alert-danger",
+      "Please submit a valid scorecard."
+    );
   }
 };
 
@@ -68,10 +75,14 @@ const deleteScorecard = e => {
       .doc(scorecardUID)
       .delete()
       .then(() => {
-        showAlert(".buttons", "alert-success", "Scorecard Deleted!");
+        showAlert(".scorecard-buttons", "alert-success", "Scorecard Deleted!");
       })
       .catch(() => {
-        showAlert(".buttons", "alert-danger", "Unable to delete scorecard.");
+        showAlert(
+          ".scorecard-buttons",
+          "alert-danger",
+          "Unable to delete scorecard."
+        );
       });
   }
 };
@@ -90,14 +101,16 @@ const editScorecard = e => {
       .doc(scorecardToEdit)
       .set(getScorecard())
       .then(() => {
-        clearScorecard();
-        updateScorecardUI();
-        hideEditScorecardButtons();
+        hideEditScorecardState(e);
         showAddScorecard();
-        showAlert(".buttons", "alert-success", "Scorecard Edited!");
+        showAlert(".scorecard-buttons", "alert-success", "Scorecard Edited!");
       });
   } catch (err) {
-    showAlert(".buttons", "alert-danger", "Unable to update scorecard.");
+    showAlert(
+      ".scorecard-buttons",
+      "alert-danger",
+      "Unable to update scorecard."
+    );
   }
 };
 
@@ -350,17 +363,27 @@ const addPractice = e => {
       .add(practiceSession)
       .then(() => {
         clearPracticeForm();
-        showAlert(".buttons", "alert-success", "Practice session added!");
+        showAlert(
+          ".practice-buttons",
+          "alert-success",
+          "Practice session added!"
+        );
       });
   } catch (err) {
     showAlert(
-      ".buttons",
+      ".practice-buttons",
       "alert-danger",
       "Please submit a valid practice session."
     );
   }
 };
 
+/**
+ * Deletes a practice session from the application.
+ *
+ * @param {Event} e Event used to navigate the DOM and find the UID of the
+ *                  practice to delete
+ */
 const deletePractice = e => {
   let practiceUID;
 
@@ -377,16 +400,92 @@ const deletePractice = e => {
       .doc(practiceUID)
       .delete()
       .then(() => {
-        showAlert(".buttons", "alert-success", "Practice Session Deleted!");
+        showAlert(
+          ".practice-buttons",
+          "alert-success",
+          "Practice Session Deleted!"
+        );
       })
       .catch(() => {
         showAlert(
-          ".buttons",
+          ".practice-buttons",
           "alert-danger",
           "Unable to delete practice session."
         );
       });
   }
+};
+
+/**
+ * Edits a user's practice session and saves the new data to the firestore.
+ *
+ * @param {Event} e
+ */
+const editPractice = e => {
+  e.preventDefault();
+
+  try {
+    db.collection("practiceSessions")
+      .doc(practiceToEdit)
+      .set(getPractice())
+      .then(() => {
+        hideEditPracticeState(e);
+        showAddPractice();
+        showAlert(
+          ".practice-buttons",
+          "alert-success",
+          "Practice Session Edited!"
+        );
+      });
+  } catch (err) {
+    showAlert(
+      ".practice-buttons",
+      "alert-danger",
+      "Unable to update practice session."
+    );
+  }
+};
+
+/**
+ * Displays the necessary buttons data to edit a practice session.
+ *
+ * @param {Event} e Event used to navigate the DOM and find the UID of the
+ *                  practice to edit
+ */
+const showEditPracticeState = e => {
+  let practiceUID;
+
+  // The target was the icon rather than the button
+  if (e.target.classList.contains("fa-pencil-alt")) {
+    practiceUID =
+      e.target.parentElement.parentElement.parentElement.dataset.uid;
+  } else {
+    practiceUID = e.target.parentElement.parentElement.dataset.uid;
+  }
+
+  db.collection("practiceSessions")
+    .doc(practiceUID)
+    .get()
+    .then(doc => {
+      practiceToEdit = practiceUID;
+      setPractice(doc.data());
+      updatePracticeUI();
+      showEditPracticeButtons();
+      hideAddPractice();
+    });
+};
+
+/**
+ * Hides the necessary buttons and updates the practice form elements.
+ *
+ * @param {Event} e Event used to prevent default submit behavior
+ */
+const hideEditPracticeState = e => {
+  e.preventDefault();
+
+  clearPracticeForm();
+  hideEditPracticeButtons();
+  showAddPractice();
 };
 
 /**
@@ -425,6 +524,7 @@ export const updatePracticesUI = snapshot => {
       deleteButton.innerHTML = "<i class='fas fa-times'></i>";
       options.appendChild(deleteButton);
 
+      editButton.addEventListener("click", showEditPracticeState);
       deleteButton.addEventListener("click", deletePractice);
 
       // Add the options div to the practice session element
@@ -500,6 +600,12 @@ if (window.location.href.endsWith("dashboard.html")) {
   document
     .getElementById("add-practice")
     .addEventListener("click", addPractice);
+  document
+    .getElementById("edit-practice")
+    .addEventListener("click", editPractice);
+  document
+    .getElementById("cancel-edit-practice")
+    .addEventListener("click", hideEditPracticeState);
   document
     .querySelector(".mobile-menu")
     .addEventListener("click", toggleSidebar);
