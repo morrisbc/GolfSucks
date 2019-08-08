@@ -138,7 +138,9 @@ const showEditScorecardState = e => {
       updateScorecardUI();
       showEditScorecardButtons();
       hideAddScorecard();
-      scrollTo(0, 0);
+      document
+        .querySelector(".new-scorecard")
+        .scrollIntoView(true, { behavior: "smooth" });
     });
 };
 
@@ -473,7 +475,9 @@ const showEditPracticeState = e => {
       updatePracticeUI();
       showEditPracticeButtons();
       hideAddPractice();
-      scrollTo(0, 0);
+      document
+        .querySelector(".practice-form")
+        .scrollIntoView(true, { behavior: "smooth" });
     });
 };
 
