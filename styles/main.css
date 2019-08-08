@@ -13,6 +13,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .alert {
   justify-content: center;
   align-self: center;
@@ -351,7 +355,6 @@ footer {
   height: auto;
   width: 100%;
   box-sizing: border-box;
-  overflow-y: auto;
   font-family: "Prompt", sans-serif;
 }
 
@@ -360,7 +363,6 @@ footer {
   width: 100%;
   box-sizing: border-box;
   padding: 1rem;
-  overflow-y: auto;
 }
 
 .scorecards {

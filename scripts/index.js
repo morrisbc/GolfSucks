@@ -138,6 +138,7 @@ const showEditScorecardState = e => {
       updateScorecardUI();
       showEditScorecardButtons();
       hideAddScorecard();
+      scrollTo(0, 0);
     });
 };
 
@@ -472,6 +473,7 @@ const showEditPracticeState = e => {
       updatePracticeUI();
       showEditPracticeButtons();
       hideAddPractice();
+      scrollTo(0, 0);
     });
 };
 
