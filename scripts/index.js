@@ -510,9 +510,63 @@ export const updatePracticesUI = snapshot => {
       let newPractice = document.createElement("div");
       newPractice.className = "practice-session";
       newPractice.dataset.uid = doc.id;
-      newPractice.appendChild(
-        document.createTextNode(JSON.stringify(practiceSession))
-      );
+      newPractice.innerHTML = `
+        <div class="practice-times">
+          <p>Start: ${
+            new Date(practiceSession.startTime).toLocaleString() !==
+            "Invalid Date"
+              ? new Date(practiceSession.startTime).toLocaleString()
+              : "-"
+          }</p>
+          <p>End: ${
+            new Date(practiceSession.endTime).toLocaleString() !==
+            "Invalid Date"
+              ? new Date(practiceSession.endTime).toLocaleString()
+              : "-"
+          }</p>
+        </div>
+      `;
+
+      // Create a div wrapper for the practice types
+      let practiceWrap = document.createElement("div");
+      practiceWrap.className = "practice-wrap";
+
+      // Create the list of full swing practice elements
+      let fullSwing = document.createElement("ul");
+      fullSwing.className = "full-swing";
+
+      fullSwing.innerHTML = "Full Swing";
+      for (let clubType in practiceSession.fullSwing) {
+        fullSwing.innerHTML += `
+          <li>${clubType.charAt(0).toUpperCase() +
+            clubType.slice(1)}: <i class="fas ${
+          practiceSession.fullSwing[clubType] === true ? "fa-check" : "fa-times"
+        }"></i></li>
+        `;
+      }
+
+      // Create the list of short game practice elements
+      let shortGame = document.createElement("ul");
+      shortGame.className = "short-game";
+
+      shortGame.innerHTML = "Short Game";
+      for (let clubType in practiceSession.shortGame) {
+        shortGame.innerHTML += `
+          <li>${clubType.charAt(0).toUpperCase() +
+            clubType.slice(1)}: <i class="fas ${
+          practiceSession.shortGame[clubType] === true ? "fa-check" : "fa-times"
+        }"></i></li>
+        `;
+      }
+
+      // Append the wrapper and the two lists to the practice session
+      practiceWrap.appendChild(fullSwing);
+      practiceWrap.appendChild(shortGame);
+      newPractice.appendChild(practiceWrap);
+
+      newPractice.innerHTML += `
+        <p class="notes">Notes: ${practiceSession.notes}</p>
+      `;
 
       // Create the div for the edit and delete buttons
       let options = document.createElement("div");
